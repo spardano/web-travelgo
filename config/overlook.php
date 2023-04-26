@@ -8,6 +8,8 @@ return [
         App\Filament\Resources\JenisKelasResource::class,
         App\Filament\Resources\JadwalResource::class,
         App\Filament\Resources\SupirResource::class,
+        App\Filament\Resources\AngkutanResource::class,
+
 
         // App\Filament\Resources\Blog\AuthorResource::class,
     ],
