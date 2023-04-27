@@ -1,1 +1,1 @@
-@livewire('seat-layout')
+@livewire('seat-layout', ['id_angkutan' => $id])

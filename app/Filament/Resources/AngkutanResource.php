@@ -74,13 +74,16 @@ class AngkutanResource extends Resource
                 //
             ])
             ->actions([
-                Action::make('seat')
+                Action::make('Bangku')
                     ->color('blue')
                     ->icon('heroicon-s-collection')
                     ->action(function (Collection $records, array $data): void {
                     })
                     ->modalContent(
-                        view('modal.seat-modal')
+                        function ($record) {
+                            $data['id'] = $record->id;
+                            return view('modal.seat-modal', $data);
+                        }
                     ),
                 Tables\Actions\EditAction::make(),
                 Tables\Actions\DeleteAction::make(),
