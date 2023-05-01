@@ -21,6 +21,7 @@ class SeatLayout extends Component
     public $bangku;
 
     //var
+    public $id_detail_bangku;
     public $baris;
     public $kolom;
     public $seat_code;
@@ -54,10 +55,11 @@ class SeatLayout extends Component
     public function storeBangku()
     {
         DetailBangku::updateOrCreate([
+            'id' => $this->id_detail_bangku,
+        ], [
             'id_angkutan' => $this->id_angkutan,
             'baris' => $this->baris,
-            'kolom' => $this->kolom
-        ], [
+            'kolom' => $this->kolom,
             'kode_bangku' => $this->seat_code,
             'ketersediaan' => $this->availability
         ]);
@@ -83,15 +85,16 @@ class SeatLayout extends Component
         $this->bangku = Bangku::where('id_angkutan', $this->id_angkutan)->first();
 
         if ($this->bangku) {
+            $this->id_detail_bangku = $this->id_detail_bangku;
             $this->numColumns = $this->bangku->jumlah_kolom;
             $this->numRows = $this->bangku->jumlah_baris;
             $this->displayMap = true;
         }
     }
 
-    public function hapusBangku($id_angkutan, $baris, $kolom)
+    public function hapusBangku($id_detail_bangku)
     {
-        DetailBangku::where('id_angkutan', $id_angkutan)->where('baris', $baris)->where('kolom', $kolom)->delete();
+        DetailBangku::find($id_detail_bangku)->delete();
         $this->bangku = Bangku::where('id_angkutan', $this->id_angkutan)->first();
         session()->flash('success', 'Berhasil menghapus bangku');
     }

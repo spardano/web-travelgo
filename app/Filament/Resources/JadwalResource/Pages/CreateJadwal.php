@@ -13,4 +13,9 @@ class CreateJadwal extends CreateRecord
     {
         return $this->getResource()::getUrl('index');
     }
+
+    protected function afterCreate(): void
+    {
+        //aksi create open ticket berdasarkan bangku tersedia
+    }
 }

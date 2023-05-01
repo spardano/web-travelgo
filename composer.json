@@ -16,6 +16,7 @@
         "laravel/sanctum": "^3.2",
         "laravel/tinker": "^2.8",
         "phpsa/filament-authentication": "^2.4",
+        "webbingbrasil/filament-maps": "^1.4",
         "z3d0x/filament-logger": "^0.5.1"
     },
     "require-dev": {

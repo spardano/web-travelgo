@@ -20,7 +20,8 @@ class JadwalResource extends Resource
     protected static ?string $model = Jadwal::class;
 
     protected static ?string $navigationGroup = 'DATA';
-    protected static ?string $navigationIcon = 'heroicon-o-user-group';
+    protected static ?string $navigationLabel = 'Jadwal';
+    protected static ?string $navigationIcon = 'heroicon-o-clock';
 
     public static function form(Form $form): Form
     {
