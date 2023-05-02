@@ -76,7 +76,7 @@
         function initMap(mapCon, zoomVal = 13, lt = lat, lg = long){
 
             $('#map-con').empty();
-            mapCon.append("<div id='map' name='map' class='form-control' style='width: auto; height: 400px'></div>");
+            mapCon.append("<div id='map' name='map' class='form-control' style='width: auto; height: 800px'></div>");
             osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
             osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
             osm = L.tileLayer(osmUrl, { maxZoom: 18, attribution: osmAttrib });
