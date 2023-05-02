@@ -106,7 +106,6 @@
         @endforeach
 
         @stack('beforeCoreScripts')
-
         
         <script defer src="{{ route('filament.asset', [
             'id' => Filament\get_asset_id('app.js'),

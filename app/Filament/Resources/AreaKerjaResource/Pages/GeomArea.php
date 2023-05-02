@@ -18,11 +18,15 @@ class GeomArea extends Page
     public $data;
     public $id_area;
     public $geometri;
+    public $data_coordinate_geom;
 
     public function mount()
     {
         $this->id_area = Request::segment(3);
         $this->data = AreaKerja::find($this->id_area);
+        $this->data_coordinate_geom = DB::select("select ST_AsGeoJson(geometri_number) as geom from area_kerjas where id = ?", [
+            $this->id_area
+        ])[0]->geom;
     }
 
     public function saveLocation()

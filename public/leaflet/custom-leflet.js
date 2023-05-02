@@ -1,4 +1,4 @@
-var polyGeoJson = null;
+    var polyGeoJson = null;
     var layer;
     var osmUrl, osmAttrib, osm, map, drawnItems;
     var baseAction = null;
@@ -7,10 +7,12 @@ var polyGeoJson = null;
     var lat = $('#lat').val();
     var long = $('#long').val();
 
+    // var geom_coordinate_json = $('#geom_coordinate').val();
+
     
     function initMap(mapCon, zoomVal = 13, lt = lat, lg = long){
+
         $('#map-con').empty();
-        $('#map-con-edit').empty();
         mapCon.append("<div id='map' name='map' class='form-control' style='width: auto; height: 400px'></div>");
         osmUrl = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
         osmAttrib = '&copy; <a href="http://openstreetmap.org/copyright">OpenStreetMap</a> contributors';
@@ -58,6 +60,42 @@ var polyGeoJson = null;
             });
         });
 
+        if(geom_coordinate_json){
+
+            
+            var geom_coordinate = JSON.parse(geom_coordinate_json);
+            let geojsonFeature = {
+                type: "Feature",
+                properties: {
+                    "name": 'Test',
+                    "amenity": "Lokasi Kerja",
+                    "popupContent": ":)"
+                },
+                geometry: geom_coordinate
+            };
+
+            let selectedFeature = null;
+                L.geoJSON(geojsonFeature,{
+                    onEachFeature: function (feature, layer1) {
+                        layer = layer1;
+                        layer.bindPopup(feature.properties.name);
+                        polyGeoJson = JSON.stringify(layer.toGeoJSON());
+                        drawnItems.addLayer(layer);
+                        layer.on('click', function(e){
+                            if(selectedFeature)
+                                selectedFeature.editing.disable();
+                            selectedFeature = e.target;
+                            e.target.editing.enable();
+                        });
+                        layer.on('edit', function(event) {
+                            layer = event.target;
+                            layer.bindPopup(layer.feature.properties.name);
+                            polyGeoJson = JSON.stringify(layer.toGeoJSON());
+                        });
+                    }
+                }).addTo(map);
+                console.log(geojsonFeature)
+        }
     }
 
     initMap($('#map-con'));
@@ -98,7 +136,6 @@ var polyGeoJson = null;
 
     $(document).ready(function() {
 
-        
         $('#data-table tbody').on('click', '.edit', function() {
             // getFormEdit();
             const data = table.row($(this).parents('tr')).data();
