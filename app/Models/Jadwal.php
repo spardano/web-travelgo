@@ -16,7 +16,8 @@ class Jadwal extends Model
         'tgl_keberangkatan',
         'id_jenis_kelas',
         'id_supir',
-        'status'
+        'status',
+        'id_angkutan'
     ];
 
 
@@ -29,5 +30,15 @@ class Jadwal extends Model
     public function supirs()
     {
         return $this->belongsTo(Supir::class, 'id_supir');
+    }
+
+    public function trayek()
+    {
+        return $this->belongsTo(Trayek::class, 'id_trayek');
+    }
+
+    public function angkutan()
+    {
+        return $this->belongsTo(Angkutan::class, 'id_angkutan');
     }
 }

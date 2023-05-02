@@ -27,7 +27,8 @@ class JadwalResource extends Resource
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('id_trayek')
+                Forms\Components\Select::make('id_trayek')
+                    ->relationship('trayek', 'nama_trayek')
                     ->required(),
                 Forms\Components\DateTimePicker::make('tgl_keberangkatan')
                     ->required(),
@@ -35,6 +36,9 @@ class JadwalResource extends Resource
                     ->relationship('jenis_kelas', 'namaKelas'),
                 Forms\Components\Select::make('id_supir')
                     ->relationship('supirs', 'nama_supir'),
+                Forms\Components\Select::make('id_angkutan')
+                    ->relationship('angkutan', 'nama_angkutan')
+                    ->required(),
                 Toggle::make('status')
                     ->required()
                     ->inline(false),
@@ -45,7 +49,8 @@ class JadwalResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('id_trayek'),
+                Tables\Columns\TextColumn::make('trayek.nama_trayek'),
+                Tables\Columns\TextColumn::make('angkutan.nama_angkutan'),
                 Tables\Columns\TextColumn::make('tgl_keberangkatan')
                     ->dateTime(),
                 Tables\Columns\TextColumn::make('jenis_kelas.namaKelas'),
