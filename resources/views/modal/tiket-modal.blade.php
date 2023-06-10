@@ -1,0 +1,1 @@
+@livewire('tiket', ['id_jadwal' => $id])

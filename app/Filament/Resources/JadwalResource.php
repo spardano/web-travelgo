@@ -12,7 +12,9 @@ use Filament\Resources\Resource;
 use Filament\Resources\Table;
 use Filament\Tables;
 use Filament\Tables\Columns\BadgeColumn;
+use Filament\Tables\Actions\Action;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class JadwalResource extends Resource
@@ -70,7 +72,19 @@ class JadwalResource extends Resource
                 //
             ])
             ->actions([
+                Action::make('Tiket')
+                    ->color('blue')
+                    ->icon('heroicon-s-ticket')
+                    ->action(function (Collection $records, array $data): void {
+                    })
+                    ->modalContent(
+                        function ($record) {
+                            $data['id'] = $record->id;
+                            return view('modal.tiket-modal', $data);
+                        }
+                    ),
                 Tables\Actions\EditAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
