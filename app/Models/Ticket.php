@@ -15,4 +15,10 @@ class Ticket extends Model
         'harga_tiket',
         'status_tiket'
     ];
+
+
+    public function detailBangku()
+    {
+        return $this->hasOne(DetailBangku::class, 'id', 'id_seat');
+    }
 }

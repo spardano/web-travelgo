@@ -4,7 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\JadwalResource\Pages;
 use App\Filament\Resources\JadwalResource\RelationManagers;
+use App\Models\DetailBangku;
 use App\Models\Jadwal;
+use App\Models\Ticket;
 use Filament\Forms;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -72,7 +74,7 @@ class JadwalResource extends Resource
                 //
             ])
             ->actions([
-                Action::make('Tiket')
+                Action::make('Kontrol Tiket')
                     ->color('blue')
                     ->icon('heroicon-s-ticket')
                     ->action(function (Collection $records, array $data): void {
@@ -84,7 +86,9 @@ class JadwalResource extends Resource
                         }
                     ),
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()
+                Tables\Actions\DeleteAction::make()->before(function ($record) {
+                    Ticket::where('id_jadwal', $record->id)->delete();
+                })
             ])
             ->bulkActions([
                 Tables\Actions\DeleteBulkAction::make(),
