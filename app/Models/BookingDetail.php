@@ -11,11 +11,23 @@ class BookingDetail extends Model
 
     protected $fillable = [
         'id_booking',
-        'id_tiket'
+        'id_tiket',
+        'nama_penumpang',
+        'nomor_hp_wa',
+        'harga_tiket',
+        'penambahan_biaya',
+        'keterangan_pemabahan_biaya',
+        'alamat_penjemputan',
+        'alamat_pengantaran',
     ];
 
     public function booking()
     {
         return $this->belongsTo(Booking::class, 'id_booking');
+    }
+
+    public function ticket()
+    {
+        return $this->belongsTo(Ticket::class, 'id_tiket');
     }
 }

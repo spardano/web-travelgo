@@ -21,4 +21,9 @@ class Ticket extends Model
     {
         return $this->hasOne(DetailBangku::class, 'id', 'id_seat');
     }
+
+    public function bookingDetail()
+    {
+        return $this->hasMany(BookingDetail::class, 'id_tiket');
+    }
 }

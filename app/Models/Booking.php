@@ -18,4 +18,9 @@ class Booking extends Model
         'total_biaya',
         'status',
     ];
+
+    public function bookingDetail()
+    {
+        return $this->hasMany(BookingDetail::class, 'id_booking');
+    }
 }
