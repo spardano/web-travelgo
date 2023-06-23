@@ -57,9 +57,20 @@ class TrayekResource extends Resource
                     ->schema([
                         Forms\Components\Select::make('area_persinggahan')
                             ->label('Pilih Kota Persinggahan')
+                            ->helperText('Pilih area persinggahan lain dalam menerima penumpang')
                             ->options(AreaKerja::all()->pluck('kabupatenKota.nama_kab_kota', 'id'))
-                            ->searchable()
-                    ])->createItemButtonLabel('+ Kota Persinggahan'),
+                            ->searchable(),
+                        Forms\Components\TextInput::make('tk_biaya')
+                            ->label('Tambah / Kurang Biaya')
+                            ->helperText('Berikan tanda "-" (minus) untuk pengurangan biaya, contoh: -20.000.')
+                            ->default(0)
+                            ->numeric()
+                            ->mask(
+                                fn (TextInput\Mask $mask) => $mask
+                                    ->numeric()
+                                    ->thousandsSeparator('.'),
+                            ),
+                    ])->columns(2)->createItemButtonLabel('+ Kota Persinggahan'),
 
             ])->columns(2);
     }
