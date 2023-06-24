@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AngkutanController;
 use App\Http\Controllers\Api\AuthMobileController;
 use App\Http\Controllers\Api\BookingController;
+use App\Http\Controllers\Api\PemesananController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -33,6 +34,10 @@ Route::middleware('auth.api')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('logout', [AuthMobileController::class, 'logout']);
         Route::get('get-user', [AuthMobileController::class, 'getUser']);
+    });
+
+    route::prefix('pemesanan')->group(function () {
+        Route::get('jadwal', [PemesananController::class, 'jadwal']);
     });
 });
 
