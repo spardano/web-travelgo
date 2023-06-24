@@ -16,7 +16,6 @@ class Ticket extends Model
         'status_tiket'
     ];
 
-
     public function detailBangku()
     {
         return $this->hasOne(DetailBangku::class, 'id', 'id_seat');
