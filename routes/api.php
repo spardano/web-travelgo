@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\AngkutanController;
 use App\Http\Controllers\Api\AuthMobileController;
+use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\PemesananController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -38,4 +39,8 @@ Route::middleware('auth.api')->group(function () {
     route::prefix('pemesanan')->group(function () {
         Route::get('jadwal', [PemesananController::class, 'jadwal']);
     });
+});
+
+Route::prefix('booking')->group(function () {
+    Route::get('geometry-checking', [BookingController::class, 'checkGeometry']);
 });
