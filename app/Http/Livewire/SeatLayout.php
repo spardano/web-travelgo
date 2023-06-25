@@ -8,6 +8,7 @@ use Livewire\Component;
 
 class SeatLayout extends Component
 {
+
     protected $listeners = ['storeBangku', 'hapusBangku'];
 
     public $id_angkutan;
@@ -33,6 +34,7 @@ class SeatLayout extends Component
 
     public function generateSeatMap()
     {
+
         Bangku::updateOrCreate([
             'id_angkutan' => $this->id_angkutan
         ], [
