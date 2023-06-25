@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AngkutanController;
 use App\Http\Controllers\Api\AuthMobileController;
 use App\Http\Controllers\Api\BookingController;
+use App\Http\Controllers\Api\HelperController;
 use App\Http\Controllers\Api\PemesananController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -26,6 +27,7 @@ Route::prefix('guest')->group(function () {
     Route::post('login', [AuthMobileController::class, 'login']);
     Route::post('register', [AuthMobileController::class, 'registration']);
     Route::post('check-token', [AuthMobileController::class, 'checkToken']);
+    Route::get('get-kabkota', [HelperController::class, 'getKabKota']);
 });
 
 //dengan middleware
@@ -37,7 +39,7 @@ Route::middleware('auth.api')->group(function () {
     });
 
     route::prefix('pemesanan')->group(function () {
-        Route::get('jadwal', [PemesananController::class, 'jadwal']);
+        Route::post('jadwal', [PemesananController::class, 'jadwal']);
     });
 });
 

@@ -15,6 +15,8 @@ class AreaKerja extends Model
         'geometri_number'
     ];
 
+    protected $hidden = ['geometri_number'];
+
     public function kabupatenKota()
     {
         return $this->hasOne(KabupatenKota::class, 'id', 'id_kabupaten');

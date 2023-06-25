@@ -18,6 +18,7 @@ class Trayek extends Model
     ];
 
 
+
     public function areaAsal()
     {
         return $this->hasOne(AreaKerja::class, 'id', 'id_area_asal');
