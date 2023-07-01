@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 class DetailBangku extends Model
 {
@@ -17,4 +18,9 @@ class DetailBangku extends Model
         'kode_bangku',
         'ketersediaan',
     ];
+
+    public function tiket()
+    {
+        return $this->hasOne(Ticket::class, 'id_seat');
+    }
 }
