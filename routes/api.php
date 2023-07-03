@@ -40,8 +40,11 @@ Route::middleware('auth.api')->group(function () {
 
     route::prefix('pemesanan')->group(function () {
         Route::post('jadwal', [PemesananController::class, 'jadwal']);
+        Route::post('get-bangku', [PemesananController::class, 'getBangku']);
+        Route::post('store-booking', [PemesananController::class, 'storeBooking']);
     });
 });
+
 
 Route::prefix('booking')->group(function () {
     Route::get('geometry-checking', [BookingController::class, 'checkGeometry']);
