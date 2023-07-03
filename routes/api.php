@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+
+
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
@@ -26,8 +28,8 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::prefix('guest')->group(function () {
     Route::post('login', [AuthMobileController::class, 'login']);
     Route::post('register', [AuthMobileController::class, 'registration']);
-    Route::post('check-token', [AuthMobileController::class, 'checkToken']);
-    Route::get('get-kabkota', [HelperController::class, 'getKabKota']);
+    Route::post('checktoken', [AuthMobileController::class, 'checkToken']);
+    Route::get('getkabkota', [HelperController::class, 'getKabKota']);
 });
 
 //dengan middleware
@@ -35,7 +37,7 @@ Route::middleware('auth.api')->group(function () {
 
     Route::prefix('user')->group(function () {
         Route::get('logout', [AuthMobileController::class, 'logout']);
-        Route::get('get-user', [AuthMobileController::class, 'getUser']);
+        Route::get('getuser', [AuthMobileController::class, 'getUser']);
     });
 
     route::prefix('pemesanan')->group(function () {
