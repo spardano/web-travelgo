@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AngkutanController;
 use App\Http\Controllers\Api\AuthMobileController;
 use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\HelperController;
+use App\Http\Controllers\api\paymentController;
 use App\Http\Controllers\Api\PemesananController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -47,5 +48,9 @@ Route::middleware('auth.api')->group(function () {
         Route::post('geometry-checking', [BookingController::class, 'checkGeometry']);
         Route::post('request-payment', [PemesananController::class, 'requestPayment']);
         Route::post('check-payment', [PemesananController::class, 'checkStatusPayment']);
+    });
+
+    route::prefix('payment')->group(function () {
+        Route::post('make-payment', [paymentController::class, 'makePayment']);
     });
 });

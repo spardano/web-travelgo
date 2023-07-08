@@ -167,12 +167,7 @@ class PemesananController extends Controller
     public function requestPayment(Request $request)
     {
 
-        $token = base64_encode(config('app.midtrans_server_key') . ':');
         $booking = Booking::with(['bookingDetail', 'user'])->where('id', $request->id_booking)->first();
-        $headers = [
-            'Content-Type' => 'application/json',
-            'Authorization' => 'Basic ' . $token,
-        ];
 
         $name = explode(' ', $request->user['name']);
 

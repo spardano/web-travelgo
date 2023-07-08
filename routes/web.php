@@ -25,3 +25,4 @@ Route::get('/seat-modal', function () {
 
 Route::get('tiketing', [tiketviewController::class, 'index']);
 Route::get('invoice', [invoiceController::class, 'index']);
+Route::resource('orders', OrderController::class)->only(['index', 'show']);
