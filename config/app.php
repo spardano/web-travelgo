@@ -213,5 +213,8 @@ return [
     ])->toArray(),
 
 
+    'midtrans_server_key' => 'SB-Mid-server-uRz8JBs6tWG-qoaf0sYEIaJD',
+    'midtrans_url' => 'https://app.sandbox.midtrans.com/snap/v1/transactions',
+    // 'midtrans_url' => 'https://app.midtrans.com/snap/v1/transactions',
 
 ];

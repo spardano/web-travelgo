@@ -23,4 +23,9 @@ class Booking extends Model
     {
         return $this->hasMany(BookingDetail::class, 'id_booking');
     }
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'id_customer');
+    }
 }

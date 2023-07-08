@@ -10,11 +10,29 @@ use App\Models\BookingDetail;
 use App\Models\Jadwal;
 use App\Models\Ticket;
 use Carbon\Carbon;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 class PemesananController extends Controller
 {
+
+    protected $client;
+    public function __construct()
+    {
+        //construct
+        $this->client = new Client();
+        // Set your Merchant Server Key
+        \Midtrans\Config::$serverKey = config('app.midtrans_server_key');
+        // Set to Development/Sandbox Environment (default). Set to true for Production Environment (accept real transaction).
+        \Midtrans\Config::$isProduction = false;
+        // Set sanitization on (default)
+        \Midtrans\Config::$isSanitized = true;
+        // Set 3DS transaction for credit card to true
+        \Midtrans\Config::$is3ds = true;
+    }
+
     public function jadwal(Request $request)
     {
 
@@ -76,8 +94,10 @@ class PemesananController extends Controller
 
         $jadwal = Jadwal::find($id_jadwal);
 
-        $bangku = Bangku::with(['detail_bangku' => function ($query) {
-            $query->with('tiket');
+        $bangku = Bangku::with(['detail_bangku' => function ($query) use ($id_jadwal) {
+            $query->with(['tiket' => function ($q) use ($id_jadwal) {
+                $q->where('id_jadwal', $id_jadwal);
+            }]);
             $query->orderBy('baris');
             $query->orderBy('kolom');
         }])->where('id_angkutan', $jadwal->id_angkutan)->first();
@@ -98,16 +118,30 @@ class PemesananController extends Controller
     public function storeBooking(Request $request)
     {
 
+        //titik jemput
+        // $titik_jemput['lat'] = $request->detail_booking['area_jemput']['lat'];
+        // $titik_jemput['lng'] = $request->detail_booking['area_jemput']['lng'];
+        // $titik_jemput['kab_kota'] = $request->detail_booking['area_jemput']['data']['kab_kota'];
+
+        //titik antar
+        // $titik_antar['lat'] = $request->detail_booking['area_antar']['lat'];
+        // $titik_antar['lng'] = $request->detail_booking['area_antar']['lng'];
+        // $titik_antar['kab_kota'] = $request->detail_booking['area_antar']['data']['kab_kota'];
+
+        $titik_antar = null;
+        $titik_jemput = null;
         $booking = Booking::create([
-            'jumlah_tiket' => count($request->detail_booking),
+            'jumlah_tiket' => count($request->detail_booking['selected_seat']),
             'waktu_booking' => Carbon::now(),
             'id_customer' => $request->user['id'],
             'total_biaya' => $request->total_harga,
-            'status' => 2
+            'titik_jemput' => json_encode($titik_jemput),
+            'titik_antar' => json_encode($titik_antar),
+            'status' => 1
         ]);
 
         if ($booking) {
-            foreach ($request->detail_booking as $item) {
+            foreach ($request->detail_booking['selected_seat'] as $item) {
 
                 $detail_booking = BookingDetail::create([
                     'id_booking' => $booking->id,
@@ -117,14 +151,102 @@ class PemesananController extends Controller
                     'harga_tiket' => $item['tiket']['harga_tiket'],
                 ]);
 
-                $tiket = Ticket::where('id', $item['tiket']['id']);
+                $tiket = Ticket::where('id', $item['tiket']['id'])->first();
                 $tiket->status_tiket = 2;
+                $tiket->save();
             }
         }
 
         return response()->json([
             'status' => true,
+            'id_booking' => $booking->id,
             'message' => 'Berhasil Menyimpan data Booking',
         ]);
+    }
+
+    public function requestPayment(Request $request)
+    {
+
+        $token = base64_encode(config('app.midtrans_server_key') . ':');
+        $booking = Booking::with(['bookingDetail', 'user'])->where('id', $request->id_booking)->first();
+        $headers = [
+            'Content-Type' => 'application/json',
+            'Authorization' => 'Basic ' . $token,
+        ];
+
+        $name = explode(' ', $request->user['name']);
+
+        $item_order = [
+            array(
+                'id' => $booking->id,
+                'price' => $booking->total_biaya,
+                'quantity' => 1,
+                'name' => $booking->user->name
+            )
+        ];
+
+        $transaction_details =  array(
+            'order_id' => $request->id_booking,
+            'gross_amount' => $booking->total_biaya
+        );
+
+        $customer_details = array(
+            'first_name' => $name[0],
+            'last_name' => $name[1] ? $name[1] : null,
+            'email' => $request->user['email'],
+            'phone' => "082283445039",
+        );
+
+        $payload = array(
+            'transaction_details' => $transaction_details,
+            'item_details' => $item_order,
+            'customer_details' => $customer_details
+        );
+
+        try {
+
+            // Get Snap Payment Page URL
+            $paymentUrl = \Midtrans\Snap::createTransaction($payload)->redirect_url;
+
+            if ($paymentUrl) {
+                return response()->json([
+                    'status' => true,
+                    'paymentUrl' => $paymentUrl,
+                ]);
+            }
+
+            return response()->json([
+                'api_status' => false,
+                'api_message' => 'Gagal melakukan request payment',
+            ]);
+        } catch (RequestException $e) {
+
+            if ($e->getResponse()->getStatusCode() == 403) {
+                return $this->requestPayment($request);
+            } else {
+                return response()->json([
+                    "status" => false,
+                    "message" => $e
+                ]);
+            }
+        }
+    }
+
+
+    public function checkStatusPayment(Request $request)
+    {
+
+        $status = \Midtrans\Transaction::status($request->id_booking);
+        if ($status) {
+            return response()->json([
+                'status' => true,
+                'data' => $status
+            ]);
+        } else {
+            return response()->json([
+                'status' => false,
+                'message' => 'Gagal mendapatkan status'
+            ]);
+        }
     }
 }

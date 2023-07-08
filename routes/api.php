@@ -44,10 +44,8 @@ Route::middleware('auth.api')->group(function () {
         Route::post('jadwal', [PemesananController::class, 'jadwal']);
         Route::post('get-bangku', [PemesananController::class, 'getBangku']);
         Route::post('store-booking', [PemesananController::class, 'storeBooking']);
+        Route::post('geometry-checking', [BookingController::class, 'checkGeometry']);
+        Route::post('request-payment', [PemesananController::class, 'requestPayment']);
+        Route::post('check-payment', [PemesananController::class, 'checkStatusPayment']);
     });
-});
-
-
-Route::prefix('booking')->group(function () {
-    Route::get('geometry-checking', [BookingController::class, 'checkGeometry']);
 });
