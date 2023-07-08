@@ -5,7 +5,7 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
 
-    <title>Jasa Mulya TravelGo - HomePage</title>
+    <title>Jasa Mulya TravelGo</title>
     <meta content="" name="description">
     <meta content="" name="keywords">
 
@@ -39,12 +39,27 @@
   ======================================================== -->
 </head>
 
+<style>
+    .inline-container {
+        white-space: nowrap;
+        /* Mencegah pemisahan baris */
+    }
+
+    .inline-container img,
+    .inline-container h1 {
+        display: inline-block;
+        /* Menampilkan elemen dalam satu baris */
+        vertical-align: middle;
+        /* Mengatur posisi vertikal jika perlu */
+    }
+</style>
+
 <body>
 
     <!-- ======= Header ======= -->
     <header id="header" class="fixed-top ">
         <div class="container d-flex align-items-center">
-            <img class="logo me-auto" src="{{ asset('assets/img/logo-travelgo.png') }}" width="300px" alt="">
+            <img class="logo me-auto" src="{{ asset('assets/img/logo-travelgo2.png') }}" width="300px" alt="">
 
             <!-- Uncomment below if you prefer to use an image logo -->
             <!-- <a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a>-->
@@ -54,24 +69,8 @@
                     <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
                     <li><a class="nav-link scrollto" href="#about">Tetang</a></li>
                     <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
-                    {{-- <li class="dropdown"><a href="#"><span>Drop Down</span> <i class="bi bi-chevron-down"></i></a>
-                        <ul>
-                            <li><a href="#">Drop Down 1</a></li>
-                            <li class="dropdown"><a href="#"><span>Deep Drop Down</span> <i
-                                        class="bi bi-chevron-right"></i></a>
-                                <ul>
-                                    <li><a href="#">Deep Drop Down 1</a></li>
-                                    <li><a href="#">Deep Drop Down 2</a></li>
-                                    <li><a href="#">Deep Drop Down 3</a></li>
-                                    <li><a href="#">Deep Drop Down 4</a></li>
-                                    <li><a href="#">Deep Drop Down 5</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="#">Drop Down 2</a></li>
-                            <li><a href="#">Drop Down 3</a></li>
-                            <li><a href="#">Drop Down 4</a></li>
-                        </ul>
-                    </li> --}}
+                    <li><a class="nav-link scrollto" href="{{ url('tiketing') }}">tiket</a></li>
+                    <li><a class="nav-link scrollto" href="{{ url('invoice') }}">invoice</a></li>
                     <li><a class="nav-link scrollto" href="#kontak">Kontak</a></li>
                     <li><a class="getstarted scrollto" href="{{ url('admin') }}">Admin Login</a></li>
                 </ul>
@@ -88,10 +87,13 @@
             <div class="row">
                 <div class="col-lg-6 d-flex flex-column justify-content-center pt-4 pt-lg-0 order-2 order-lg-1"
                     data-aos="fade-up" data-aos-delay="200">
-                    <h1>Solusi yang pas buat perjalanan kamu</h1>
-                    <h2>kami melayani dengan setulus hati demi kenyamanan dan keamanan anda</h2>
+                    <div class="inline-container">
+                        <img src="{{ asset('assets/img/logojmt123.png') }}" width="80px;" height="100px;">
+                        <h1 style="padding-left: 20px;">JASA MULYA TRAVEL</h1><br>
+                    </div>
+                    <h2 style="padding-left: 120px;">Kami Mengutamakan Pelayanan Terbaik</h2>
                     <div class="d-flex justify-content-center justify-content-lg-start">
-                        <a href="#about" class="btn-get-started scrollto">Aplikasi</a>
+                        <a href="#about" class="btn-get-started scrollto">Get App</a>
                         <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i
                                 class="bi bi-play-circle"></i><span>Watch Video</span></a>
                     </div>
@@ -113,27 +115,27 @@
                 <div class="row" data-aos="zoom-in">
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('assets/img/clients/client-1.png') }}" class="img-fluid" alt="">
+                        <img src="{{ asset('assets/img/Pekanbaru.png') }}" class="img-fluid" alt="">
                     </div>
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('assets/img/clients/client-2.png') }}" class="img-fluid" alt="">
+                        <img src="{{ asset('assets/img/Dumai.png') }}" class="img-fluid" alt="">
                     </div>
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('assets/img/clients/client-3.png') }}" class="img-fluid" alt="">
+                        <img src="{{ asset('assets/img/Bengkalis.png') }}" class="img-fluid" alt="">
                     </div>
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('assets/img/clients/client-4.png') }}" class="img-fluid" alt="">
+                        <img src="{{ asset('assets/img/Rengat.png') }}" class="img-fluid" alt="">
                     </div>
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('assets/img/clients/client-5.png') }}" class="img-fluid" alt="">
+                        <img src="{{ asset('assets/img/Padang.png') }}" class="img-fluid" alt="">
                     </div>
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('assets/img/clients/client-6.png') }}" class="img-fluid" alt="">
+                        <img src="{{ asset('assets/img/Dharmasraya.png') }}" class="img-fluid" alt="">
                     </div>
 
                 </div>
@@ -150,30 +152,22 @@
                 </div>
 
                 <div class="row content">
-                    <div class="col-lg-6">
-                        <p>
-                            Jasa Mulya Travel merupakan perusahaan terbatas yang bergerak dibidang moda transportasi
-                            antar kota dan provinsi yang ada di pulau sumatera berikut memrupakan beberapa jalus
-                            perjalanan yang menjadi layanan kami
-                        </p>
-                        <ul>
-                            <li><i class="ri-check-double-line"></i> Pekanbaru</li>
-                            <li><i class="ri-check-double-line"></i> Dumai</li>
-                            <li><i class="ri-check-double-line"></i> Payakumbuh</li>
-                            <li><i class="ri-check-double-line"></i> Bukittinggi</li>
-                            <li><i class="ri-check-double-line"></i> Padang Panjang</li>
-                            <li><i class="ri-check-double-line"></i> Padang</li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-6 pt-4 pt-lg-0">
-                        <p>
-                            Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-                            reprehenderit in voluptate
-                            velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                            proident, sunt in
-                            culpa qui officia deserunt mollit anim id est laborum.
-                        </p>
-                        <a href="#" class="btn-learn-more">Learn More</a>
+                    <div class="col-lg-12">
+                        <p style="text-align: center; font-size:35px;"><b>PT. JASA MULYA TRAVEL</b></p>
+                        <p style="text-align: center; font-size:30px;"><b>VISI :</b></p>
+                        <p style="text-align: center; font-size:25px;"><b>Menjadikan PT. Jasa Mulya Trans Gemilang
+                                sebagai Leader Perusahaan Travel Antar Jemput Alamat di Provinsi Riau dan Sumatera
+                                Barat.</b></p>
+                        <p style="text-align: center; font-size:30px;"><b>MISI :</b></p>
+                        <p style="text-align: center; font-size:25px;"><b>• Menumbuhkan Rasa Kekeluargaan untuk
+                                membangun silaturahmi yang baik, Bagi seluruh keluarga besar PT. Jasa Mulya Trans
+                                Gemilang.</b></p>
+                        <p style="text-align: center; font-size:25px;"><b>• Memberikan Pelayanan Yang Terbaik dengan
+                                Bersikap Ramah dan Sopan terhadap Pelanggan.</b></p>
+                        <p style="text-align: center; font-size:25px;"><b>• Memberikan kesejahteraan kepada seluruh
+                                Keluarga Besar PT. Jasa Mulya Trans Gemilang.</b></p>
+                        <p style="text-align: center; font-size:30px;"><b>MOTO :</b></p>
+                        <p style="text-align: center; font-size:25px;"><b>“Your Comfortable Journey”</b></p>
                     </div>
                 </div>
 
@@ -194,7 +188,7 @@
                         data-aos-delay="100">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bxl-dribbble"></i></div>
-                            <h4><a href="">Apk Travel GO</a></h4>
+                            <h4><a href="">App Travel GO</a></h4>
                             <p>Kami menyediakan layanan pembelian tiket travel dengan menggunakan aplikasi agar dapat
                                 mempermudah anda dalam mencari dan melakukan pemesanan tiket travel kami</p>
                         </div>
@@ -205,9 +199,8 @@
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-file"></i></div>
                             <h4><a href="">Antar Jemput</a></h4>
-                            <p>Dengan layanan ini anda tidak harus datang ke terminal, cukup hanya menunggu di alamat
-                                yang sudah anda tentukan. layanan ini hanya menerima alamat jemput yang berada didalam
-                                area kerja kami.</p>
+                            <p>Layanan antar jemput hanya melayani area kerja atau jaraj terjauh 5 km dari pusat kota
+                                keberangkatan atau tujuan.</p>
                         </div>
                     </div>
 
@@ -215,8 +208,10 @@
                         data-aos-delay="300">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-tachometer"></i></div>
-                            <h4><a href="">Pengiriman Paket</a></h4>
-                            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+                            <h4><a href="">Pengiriman Paket/Document</a></h4>
+                            <p>Pengiriman paket tidak tersedia di aplikasi dan tidak mendapat layanan antar jemput,
+                                setiap paket yang akan
+                                dikirim harus diantar kealamat loket kami yang ada di kota anda,</p>
                         </div>
                     </div>
 
@@ -224,8 +219,8 @@
                         data-aos-delay="400">
                         <div class="icon-box">
                             <div class="icon"><i class="bx bx-layer"></i></div>
-                            <h4><a href="">Promo</a></h4>
-                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
+                            <h4><a href="">Asuransi</a></h4>
+                            <p>Setiap pembelian tiket travel kami sudah termasuk asuransi jasa raharja</p>
                         </div>
                     </div>
 
@@ -252,9 +247,9 @@
                             <div class="pic"><img src="{{ asset('assets/img/team/team-1.jpg') }}"
                                     class="img-fluid" alt=""></div>
                             <div class="member-info">
-                                <h4>Walter White</h4>
-                                <span>Chief Executive Officer</span>
-                                <p>Explicabo voluptatem mollitia et repellat qui dolorum quasi</p>
+                                <h4>Resdal</h4>
+                                <span>Admin Pekanbaru</span>
+                                <p>Hp: 085219570004</p>
                                 <div class="social">
                                     <a href=""><i class="ri-twitter-fill"></i></a>
                                     <a href=""><i class="ri-facebook-fill"></i></a>
@@ -271,8 +266,8 @@
                                     class="img-fluid" alt=""></div>
                             <div class="member-info">
                                 <h4>Sarah Jhonson</h4>
-                                <span>Product Manager</span>
-                                <p>Aut maiores voluptates amet et quis praesentium qui senda para</p>
+                                <span>Admin Padang-Dharmasraya</span>
+                                <p>Hp: 085219570004</p>
                                 <div class="social">
                                     <a href=""><i class="ri-twitter-fill"></i></a>
                                     <a href=""><i class="ri-facebook-fill"></i></a>
@@ -289,8 +284,8 @@
                                     class="img-fluid" alt=""></div>
                             <div class="member-info">
                                 <h4>William Anderson</h4>
-                                <span>CTO</span>
-                                <p>Quisquam facilis cum velit laborum corrupti fuga rerum quia</p>
+                                <span>Admin Dumai-Rupat</span>
+                                <p>Hp: 085219570004</p>
                                 <div class="social">
                                     <a href=""><i class="ri-twitter-fill"></i></a>
                                     <a href=""><i class="ri-facebook-fill"></i></a>
@@ -307,8 +302,8 @@
                                     class="img-fluid" alt=""></div>
                             <div class="member-info">
                                 <h4>Amanda Jepson</h4>
-                                <span>Accountant</span>
-                                <p>Dolorum tempora officiis odit laborum officiis et et accusamus</p>
+                                <span>Admin Rengat</span>
+                                <p>Hp: 085219570004</p>
                                 <div class="social">
                                     <a href=""><i class="ri-twitter-fill"></i></a>
                                     <a href=""><i class="ri-facebook-fill"></i></a>
@@ -335,9 +330,8 @@
 
                 <div class="section-title">
                     <h2>Alamat</h2>
-                    <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit
-                        sint consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias
-                        ea. Quia fugiat sit in iste officiis commodi quidem hic quas.</p>
+                    <p>Untuk Pembelian Tiket Secara Manual atau datang lansung keloket dapat mendatangi alamat dibawah
+                    </p>
                 </div>
 
                 <div class="row">
@@ -346,24 +340,25 @@
                         <div class="info">
                             <div class="address">
                                 <i class="bi bi-geo-alt"></i>
-                                <h4>Location:</h4>
-                                <p>A108 Adam Street, New York, NY 535022</p>
+                                <h4>Lokasi:</h4>
+                                <p>Jl. Merak No.05 D, Tangkerang Tengah, Kec.Marpoyan Damai, Kota Pekanbaru, Riau 28125
+                                </p>
                             </div>
 
                             <div class="email">
                                 <i class="bi bi-envelope"></i>
                                 <h4>Email:</h4>
-                                <p>info@example.com</p>
+                                <p>www.Travelgo.com</p>
                             </div>
 
                             <div class="phone">
                                 <i class="bi bi-phone"></i>
                                 <h4>Call:</h4>
-                                <p>+1 5589 55488 55s</p>
+                                <p>085219570004</p>
                             </div>
 
                             <iframe
-                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621"
+                                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12121.333330927442!2d101.4488938!3d0.4896646!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31d5aec4f76db6f9%3A0xe82078220f57ecc2!2sJASA+MULYA+Travel+Pekanbaru+Duri+Dumai!5e0!3m2!1sid!2sid!4v1625734820766"
                                 frameborder="0" style="border:0; width: 100%; height: 290px;"
                                 allowfullscreen></iframe>
                         </div>
@@ -387,11 +382,11 @@
                     <div class="col-lg-3 col-md-6 footer-contact">
                         <h3>Jasa Mulya Travel</h3>
                         <p>
-                            A108 Adam Street <br>
-                            New York, NY 535022<br>
-                            United States <br><br>
-                            <strong>Phone:</strong> 0895618958338<br>
-                            <strong>Email:</strong> aldianwillia42@gmail.com<br>
+                            Jl. Merak No.05 D, Tangkerang Tengah <br>
+                            Kec.Marpoyan Damai, Kota Pekanbaru<br>
+                            Riau 28125 <br><br>
+                            <strong>Phone:</strong> 085219570004<br>
+                            <strong>Email:</strong> www.JasaMulyaTravel.com<br>
                         </p>
                     </div>
 
