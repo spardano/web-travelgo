@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    @if ($order->payment_status == 1)
+    @if ($paymentTransactions->payment_status == 1)
      <button class="btn btn-primary" id="pay-button">Pay Now</button>
     @else
         Payment successful

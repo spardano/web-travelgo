@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\invoiceController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentCallbackController;
 use App\Http\Controllers\tiketviewController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,4 +28,5 @@ Route::get('/seat-modal', function () {
 
 Route::get('tiketing', [tiketviewController::class, 'index']);
 Route::get('invoice', [invoiceController::class, 'index']);
-Route::get('payment/{payment_number}', OrderController::class);
+Route::get('payment/{payment_number}', [OrderController::class, 'show']);
+Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
