@@ -17,4 +17,9 @@ class PaymentTransactions extends Model
         'payment_status',
         'snap_token',
     ];
+
+    public function booking()
+    {
+        return $this->hasOne(Booking::class, 'id', 'id_booking');
+    }
 }

@@ -25,4 +25,9 @@ class Ticket extends Model
     {
         return $this->hasMany(BookingDetail::class, 'id_tiket');
     }
+
+    public function jadwal()
+    {
+        return $this->hasOne(Jadwal::class, 'id', 'id_jadwal');
+    }
 }

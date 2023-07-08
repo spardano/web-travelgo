@@ -12,6 +12,7 @@ class PaymentCallbackController extends Controller
     {
         $callback = new CallbackService;
 
+
         if ($callback->isSignatureKeyVerified()) {
             $notification = $callback->getNotification();
             $payment = $callback->getPayment();
@@ -38,7 +39,7 @@ class PaymentCallbackController extends Controller
                 ->json([
                     'success' => true,
                     'message' => 'Notifikasi berhasil diproses',
-                ]);
+                ], 200);
         } else {
             return response()
                 ->json([

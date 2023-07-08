@@ -39,6 +39,8 @@ class OrderController extends Controller
     {
 
         $paymentTransactions = PaymentTransactions::where('number', $transaction_number)->first();
+
+
         $snapToken = $paymentTransactions->snap_token;
         if (is_null($snapToken)) {
             // If snap token is still NULL, generate snap token and save it to database
