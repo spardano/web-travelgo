@@ -24,8 +24,14 @@ class paymentController extends Controller
 
         if ($payment) {
             return response()->json([
-                ''
+                'status' => true,
+                'data' => $payment,
             ]);
         }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'gagal menambahkan order'
+        ]);
     }
 }

@@ -35,8 +35,10 @@ class OrderController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(PaymentTransactions $paymentTransactions)
+    public function show($transaction_number)
     {
+
+        $paymentTransactions = PaymentTransactions::where('number', $transaction_number)->first();
         $snapToken = $paymentTransactions->snap_token;
         if (is_null($snapToken)) {
             // If snap token is still NULL, generate snap token and save it to database

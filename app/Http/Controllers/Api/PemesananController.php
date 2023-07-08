@@ -8,12 +8,13 @@ use App\Models\Bangku;
 use App\Models\Booking;
 use App\Models\BookingDetail;
 use App\Models\Jadwal;
+use App\Models\PaymentTransactions;
 use App\Models\Ticket;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Illuminate\Support\Str;
 
 class PemesananController extends Controller
 {
@@ -155,10 +156,19 @@ class PemesananController extends Controller
                 $tiket->status_tiket = 2;
                 $tiket->save();
             }
+
+            $payment = PaymentTransactions::create([
+                'number' => Str::orderedUuid(),
+                'id_booking' => $booking->id,
+                'id_customer' => $request->user['id'],
+                'gross_amount' => $booking->total_biaya,
+                'payment_status' => 1,
+            ]);
         }
 
         return response()->json([
             'status' => true,
+            'payment_number' => $payment->number,
             'id_booking' => $booking->id,
             'message' => 'Berhasil Menyimpan data Booking',
         ]);
