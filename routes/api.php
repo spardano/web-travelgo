@@ -48,6 +48,7 @@ Route::middleware('auth.api')->group(function () {
         Route::post('geometry-checking', [BookingController::class, 'checkGeometry']);
         Route::post('request-payment', [PemesananController::class, 'requestPayment']);
         Route::post('check-payment', [PemesananController::class, 'checkStatusPayment']);
+        Route::post('get-booking', [PemesananController::class, 'getBooking']);
     });
 
     route::prefix('payment')->group(function () {

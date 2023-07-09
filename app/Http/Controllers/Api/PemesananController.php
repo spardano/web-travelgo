@@ -10,6 +10,7 @@ use App\Models\BookingDetail;
 use App\Models\Jadwal;
 use App\Models\PaymentTransactions;
 use App\Models\Ticket;
+use App\Models\Trayek;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -114,6 +115,36 @@ class PemesananController extends Controller
             'status' => true,
             'data' => $bangku
         ]);
+    }
+
+    public function getBooking(Request $request)
+    {
+
+        $listbooking = Booking::with(['bookingDetail'])->where('id_customer', $request->id)->get();
+
+
+        $multiplied = $listbooking->map(function ($item) {
+
+            $bookingDetail = BookingDetail::with('ticket.jadwal.trayek')->where('id', $item->bookingDetail[0]->id)->first();
+            $temp['nama_trayek'] = $bookingDetail->ticket->jadwal->trayek ? $bookingDetail->ticket->jadwal->trayek->nama_trayek : null;
+            $temp['id_booking'] = $item->id;
+            $temp['jml_tiket'] = $item->jumlah_tiket;
+            $temp['harga_tiket'] = $bookingDetail->ticket->harga_tiket;
+            $temp['penambahan_biaya'] = $bookingDetail->penambahan_biaya;
+            $temp['total_biaya'] = $item->total_biaya;
+            $temp['waktu_booking'] = $item->waktu_booking;
+            $temp['status'] = $item->status;
+            return $temp;
+        });
+
+        $data_baru = $multiplied->all();
+
+        if ($data_baru) {
+            return response()->json([
+                'status' => true,
+                'data' => $data_baru,
+            ]);
+        }
     }
 
     public function storeBooking(Request $request)
