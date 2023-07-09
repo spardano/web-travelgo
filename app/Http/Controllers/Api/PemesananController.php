@@ -116,6 +116,17 @@ class PemesananController extends Controller
         ]);
     }
 
+    public function getBooking(Request $request)
+    {
+        $listbooking = Booking::with(['bookingDetail'])->where('id_customer', $request->id)->first();
+        if ($listbooking) {
+            return response()->json([
+                'status' => true,
+                'data' => $listbooking,
+            ]);
+        }
+    }
+
     public function storeBooking(Request $request)
     {
 
