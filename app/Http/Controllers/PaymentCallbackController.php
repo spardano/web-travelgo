@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Booking;
 use App\Models\PaymentTransactions;
+use App\Models\Ticket;
 use App\Services\Midtrans\CallbackService;
 use Illuminate\Http\Request;
 
@@ -21,18 +23,51 @@ class PaymentCallbackController extends Controller
                 PaymentTransactions::where('id', $payment->id)->update([
                     'payment_status' => 2,
                 ]);
+
+                $booking = Booking::where('id', $payment->id_booking)->first();
+                $booking->status = 2;
+
+                foreach ($booking->bookingDetail as  $item) {
+                    Ticket::where('id', $item->ticket->id)->update([
+                        'status_tiket' => 3
+                    ]);
+                }
+
+                $booking->save();
             }
 
             if ($callback->isExpire()) {
                 PaymentTransactions::where('id', $payment->id)->update([
                     'payment_status' => 3,
                 ]);
+
+                $booking = Booking::where('id', $payment->id_booking)->first();
+                $booking->status = 3;
+
+                foreach ($booking->bookingDetail as  $item) {
+                    Ticket::where('id', $item->ticket->id)->update([
+                        'status_tiket' => 1
+                    ]);
+                }
+
+                $booking->save();
             }
 
             if ($callback->isCancelled()) {
                 PaymentTransactions::where('id', $payment->id)->update([
                     'payment_status' => 4,
                 ]);
+
+                $booking = Booking::where('id', $payment->id_booking)->first();
+                $booking->status = 4;
+
+                foreach ($booking->bookingDetail as  $item) {
+                    Ticket::where('id', $item->ticket->id)->update([
+                        'status_tiket' => 1
+                    ]);
+                }
+
+                $booking->save();
             }
 
             return response()
@@ -47,5 +82,15 @@ class PaymentCallbackController extends Controller
                     'message' => 'Signature key tidak terverifikasi',
                 ], 403);
         }
+    }
+
+    public function success()
+    {
+        return view('payment.success');
+    }
+
+    public function error()
+    {
+        return view('payment.error');
     }
 }

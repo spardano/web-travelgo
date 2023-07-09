@@ -30,3 +30,5 @@ Route::get('tiketing', [tiketviewController::class, 'index']);
 Route::get('invoice', [invoiceController::class, 'index']);
 Route::get('payment/{payment_number}', [OrderController::class, 'show']);
 Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
+Route::get('payments/success', [PaymentCallbackController::class, 'success'])->name('payment-success');
+Route::get('payments/error', [PaymentCallbackController::class, 'error'])->name('payment-error');
