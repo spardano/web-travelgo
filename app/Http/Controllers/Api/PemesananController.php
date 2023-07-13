@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Livewire\Tiket;
 use App\Models\Angkutan;
 use App\Models\Bangku;
 use App\Models\Booking;
 use App\Models\BookingDetail;
+use App\Models\DetailBangku;
 use App\Models\Jadwal;
 use App\Models\PaymentTransactions;
 use App\Models\Ticket;
@@ -120,12 +122,12 @@ class PemesananController extends Controller
     public function getBooking(Request $request)
     {
 
-        $listbooking = Booking::with(['bookingDetail'])->where('id_customer', $request->id)->get();
-
+        $listbooking = Booking::with(['bookingDetail.ticket.detailBangku'])->where('id_customer', $request->id)->orderBy('created_at', 'desc')->get();
 
         $multiplied = $listbooking->map(function ($item) {
 
             $bookingDetail = BookingDetail::with('ticket.jadwal.trayek')->where('id', $item->bookingDetail[0]->id)->first();
+            $wkt = explode(" ", $bookingDetail->ticket->jadwal->tgl_keberangkatan);
             $temp['nama_trayek'] = $bookingDetail->ticket->jadwal->trayek ? $bookingDetail->ticket->jadwal->trayek->nama_trayek : null;
             $temp['id_booking'] = $item->id;
             $temp['jml_tiket'] = $item->jumlah_tiket;
@@ -133,7 +135,12 @@ class PemesananController extends Controller
             $temp['penambahan_biaya'] = $bookingDetail->penambahan_biaya;
             $temp['total_biaya'] = $item->total_biaya;
             $temp['waktu_booking'] = $item->waktu_booking;
+            $temp['tanggal_berangkat'] = $wkt[0];
+            $temp['waktu_berangkat'] = $wkt[1];
             $temp['status'] = $item->status;
+
+            $temp['tiket'] = $temp;
+
             return $temp;
         });
 
@@ -145,6 +152,11 @@ class PemesananController extends Controller
                 'data' => $data_baru,
             ]);
         }
+    }
+
+    public function getBookingdetail(Request $request)
+    {
+        return $boking_detail = Booking::with(['bookingDetail.ticket.jadwal.trayek', 'bookingDetail.ticket.detailBangku'])->where('id', $request->id_booking)->first();
     }
 
     public function storeBooking(Request $request)
@@ -203,6 +215,20 @@ class PemesananController extends Controller
             'id_booking' => $booking->id,
             'message' => 'Berhasil Menyimpan data Booking',
         ]);
+    }
+
+    public function refundCencel(Request $request)
+    {
+        if ($request) {
+            Booking::where('id', $request->id_booking)->update([
+                'status' => 4
+            ]);
+
+            return response()->json([
+                'status' => true,
+                'message' => "Bookingan dibatalkan"
+            ]);
+        }
     }
 
     public function requestPayment(Request $request)
