@@ -216,4 +216,34 @@ class AuthMobileController extends Controller
             ], 200);
         }
     }
+
+    public function editnumber(Request $request)
+    {
+        $number = $request->nomerbaru;
+
+        $check = User::where('phone_number', $number)->first();
+        if ($check) {
+            return response()->json([
+                'status' => false,
+                'message' => 'nomor tidak uniq'
+            ]);
+        }
+
+        $user = User::where('id', $request->user['id'])->update([
+            'phone_number' => $number
+        ]);
+
+
+        if ($user) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Nomor kontak berhasil di ubah'
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'Nomer gagal dirubah'
+        ]);
+    }
 }

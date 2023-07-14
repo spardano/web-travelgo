@@ -40,6 +40,7 @@ Route::middleware('auth.api')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('logout', [AuthMobileController::class, 'logout']);
         Route::get('getuser', [AuthMobileController::class, 'getUser']);
+        Route::post('update-number', [AuthMobileController::class, 'editnumber']);
     });
 
     route::prefix('pemesanan')->group(function () {
@@ -52,7 +53,7 @@ Route::middleware('auth.api')->group(function () {
         Route::post('get-booking', [PemesananController::class, 'getBooking']);
         Route::post('get-booking-detail', [PemesananController::class, 'getBookingdetail']);
         Route::post('cencel-booking', [PemesananController::class, 'refundCencel']);
-        Route::post('refund', [refundController::class, 'storeRefund']);
+        Route::post('get-bank', [refundController::class, 'getBank']);
         Route::post('refund', [refundController::class, 'storeRefund']);
     });
 
