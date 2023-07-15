@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\BookingController;
 use App\Http\Controllers\Api\HelperController;
 use App\Http\Controllers\api\paymentController;
 use App\Http\Controllers\Api\PemesananController;
+use App\Http\Controllers\Api\refundController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,7 @@ Route::middleware('auth.api')->group(function () {
     Route::prefix('user')->group(function () {
         Route::get('logout', [AuthMobileController::class, 'logout']);
         Route::get('getuser', [AuthMobileController::class, 'getUser']);
+        Route::post('update-number', [AuthMobileController::class, 'editnumber']);
     });
 
     route::prefix('pemesanan')->group(function () {
@@ -49,6 +51,10 @@ Route::middleware('auth.api')->group(function () {
         Route::post('request-payment', [PemesananController::class, 'requestPayment']);
         Route::post('check-payment', [PemesananController::class, 'checkStatusPayment']);
         Route::post('get-booking', [PemesananController::class, 'getBooking']);
+        Route::post('get-booking-detail', [PemesananController::class, 'getBookingdetail']);
+        Route::post('cencel-booking', [PemesananController::class, 'refundCencel']);
+        Route::post('get-bank', [refundController::class, 'getBank']);
+        Route::post('refund', [refundController::class, 'storeRefund']);
     });
 
     route::prefix('payment')->group(function () {

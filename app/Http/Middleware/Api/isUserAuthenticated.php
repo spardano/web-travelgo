@@ -28,6 +28,7 @@ class isUserAuthenticated
         try {
 
             $token_key = $this->crypt->crypt($request->header('authorization'), 'd');
+
             $decode_json_data = json_decode($token_key);
 
             $access_token = $decode_json_data->access_token;
