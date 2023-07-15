@@ -35,7 +35,6 @@ class User extends Authenticatable implements MustVerifyEmail, FilamentUser
      * @var array<int, string>
      */
     protected $hidden = [
-        'password',
         'remember_token',
     ];
 

@@ -4,6 +4,7 @@ use App\Http\Controllers\invoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentCallbackController;
 use App\Http\Controllers\tiketviewController;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -21,6 +22,10 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Route::get('testps', function () {
+//     return Hash::make('Aldian8899');
+// });
 
 Route::get('/seat-modal', function () {
     return view('modal.seat-modal');

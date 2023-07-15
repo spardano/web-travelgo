@@ -216,4 +216,52 @@ class AuthMobileController extends Controller
             ], 200);
         }
     }
+
+    public function editnumber(Request $request)
+    {
+        $number = $request->nomerbaru;
+
+        $check = User::where('phone_number', $number)->first();
+        if ($check) {
+            return response()->json([
+                'status' => false,
+                'message' => 'nomor tidak uniq'
+            ]);
+        }
+
+        $user = User::where('id', $request->user['id'])->update([
+            'phone_number' => $number
+        ]);
+
+
+        if ($user) {
+            return response()->json([
+                'status' => true,
+                'message' => 'Nomor kontak berhasil di ubah'
+            ]);
+        }
+
+        return response()->json([
+            'status' => false,
+            'message' => 'Nomer gagal dirubah'
+        ]);
+    }
+
+    public function editPassword(Request $request)
+    {
+        $checkPass = Hash::check($request->passlama, $request->user['password']);
+        if ($checkPass) {
+            User::where('id', $request->user['id'])->update([
+                'password' => Hash::make($request->passbaru)
+            ]);
+            return response()->json([
+                'status' => true,
+                'message' => 'Password berhasil di perbarui'
+            ]);
+        }
+        return response()->json([
+            'status' => false,
+            'message' => 'Password yang anda masukan tidak benar'
+        ]);
+    }
 }
