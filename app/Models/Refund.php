@@ -20,4 +20,14 @@ class Refund extends Model
         'no_transaksi',
         'alasan'
     ];
+
+    public function user()
+    {
+        return $this->hasOne(User::class, 'id', 'id_customer');
+    }
+
+    public function booking()
+    {
+        return $this->hasOne(User::class, 'id', 'id_booking');
+    }
 }
