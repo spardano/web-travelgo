@@ -9,6 +9,6 @@ class invoiceController extends Controller
     public function index()
     {
 
-        return view('invoice');
+        // return view('invoice');
     }
 }

@@ -2,8 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\PaymentTransactionsResource\Pages;
-use App\Filament\Resources\PaymentTransactionsResource\RelationManagers;
+use App\Filament\Resources\PaymentResource\Pages;
+use App\Filament\Resources\PaymentResource\RelationManagers;
+use App\Filament\Resources\PaymentResource\Widgets\totalPaymentSettle;
+use App\Models\Payment;
 use App\Models\PaymentTransactions;
 use Filament\Forms;
 use Filament\Resources\Form;
@@ -15,7 +17,7 @@ use Filament\Tables\Columns\TextColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class PaymentTransactionsResource extends Resource
+class PaymentResource extends Resource
 {
     protected static ?string $model = PaymentTransactions::class;
 
@@ -26,9 +28,7 @@ class PaymentTransactionsResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                //
-            ]);
+            ->schema([]);
     }
 
     public static function table(Table $table): Table
@@ -55,18 +55,33 @@ class PaymentTransactionsResource extends Resource
                 //
             ])
             ->actions([
-                // Tables\Actions\EditAction::make(),
-                // Tables\Actions\DeleteAction::make(),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                // Tables\Actions\DeleteBulkAction::make(),
+                Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function getWidgets(): array
+    {
+        return [
+            totalPaymentSettle::class,
+        ];
+    }
+
+    public static function getRelations(): array
+    {
+        return [
+            //
+        ];
     }
 
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ManagePaymentTransactions::route('/'),
+            'index' => Pages\ListPayments::route('/'),
+            'create' => Pages\CreatePayment::route('/create'),
+            'edit' => Pages\EditPayment::route('/{record}/edit'),
         ];
     }
 }

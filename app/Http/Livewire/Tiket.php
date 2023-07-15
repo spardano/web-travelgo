@@ -6,8 +6,10 @@ use App\Models\Booking;
 use App\Models\BookingDetail;
 use App\Models\DetailBangku;
 use App\Models\Ticket;
+use Barryvdh\DomPDF\Facade\Pdf as FacadePdf;
 use Carbon\Carbon;
 use Livewire\Component;
+use Barryvdh\DomPDF\PDF;
 
 class Tiket extends Component
 {
@@ -178,6 +180,25 @@ class Tiket extends Component
         }
 
         $this->isManualEnabled = true;
+    }
+
+    public function printTicket($id_booking)
+    {
+        $viewData = [];
+
+        $pdfContent = PDF::loadView('print.tiketview');
+        return $pdfContent->download('tiket.pdf');
+
+        // return response()->streamDownload(
+        //     fn () => print($pdfContent),
+        //     "tiket.pdf"
+        // );
+    }
+
+    public function printInvoice($id_booking)
+    {
+        // $pdf = PDF::loadView('print.invoice');
+        return view('print.invoice');
     }
 
     public function keluarFormManual()
