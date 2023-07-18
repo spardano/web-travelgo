@@ -41,6 +41,7 @@ Route::middleware('auth.api')->group(function () {
         Route::get('logout', [AuthMobileController::class, 'logout']);
         Route::get('getuser', [AuthMobileController::class, 'getUser']);
         Route::post('update-number', [AuthMobileController::class, 'editnumber']);
+        Route::post('update-pass', [AuthMobileController::class, 'editPassword']);
     });
 
     route::prefix('pemesanan')->group(function () {
