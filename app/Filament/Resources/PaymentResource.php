@@ -38,6 +38,7 @@ class PaymentResource extends Resource
                 Tables\Columns\TextColumn::make('number')->label('ID Pembayaran'),
                 Tables\Columns\TextColumn::make('gross_amount')->label('Total Bayar')->money('IDR', true),
                 TextColumn::make('created_at')->dateTime(),
+                TextColumn::make('booking.user.name')->label('Nama Pemesan'),
                 BadgeColumn::make('payment_status')
                     ->enum([
                         '1' => 'Pending',
@@ -55,10 +56,10 @@ class PaymentResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                // Tables\Actions\DeleteBulkAction::make(),
             ]);
     }
 
@@ -81,7 +82,12 @@ class PaymentResource extends Resource
         return [
             'index' => Pages\ListPayments::route('/'),
             'create' => Pages\CreatePayment::route('/create'),
-            'edit' => Pages\EditPayment::route('/{record}/edit'),
+            // 'edit' => Pages\EditPayment::route('/{record}/edit'),
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
     }
 }

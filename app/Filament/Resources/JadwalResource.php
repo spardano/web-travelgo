@@ -3,10 +3,10 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\JadwalResource\Pages;
-use App\Filament\Resources\JadwalResource\RelationManagers;
-use App\Models\DetailBangku;
 use App\Models\Jadwal;
 use App\Models\Ticket;
+use Carbon\Carbon;
+use Closure;
 use Filament\Forms;
 use Filament\Forms\Components\Toggle;
 use Filament\Resources\Form;
@@ -83,9 +83,13 @@ class JadwalResource extends Resource
                             return view('modal.tiket-modal', $data);
                         }
                     ),
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\EditAction::make()->visible(function ($record) {
+                    return $record->tgl_keberangkatan >= Carbon::now();
+                }),
                 Tables\Actions\DeleteAction::make()->before(function ($record) {
                     Ticket::where('id_jadwal', $record->id)->delete();
+                })->visible(function ($record) {
+                    return $record->tgl_keberangkatan >= Carbon::now();
                 })
             ])
             ->bulkActions([

@@ -22,7 +22,7 @@ class SupirResource extends Resource
     protected static ?string $model = Supir::class;
 
     protected static ?string $navigationLabel = 'Sopir';
-    protected static ?string $navigationGroup = 'DATA';
+    protected static ?string $navigationGroup = 'Masters';
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
     public static function form(Form $form): Form

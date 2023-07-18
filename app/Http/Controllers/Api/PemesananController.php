@@ -40,27 +40,28 @@ class PemesananController extends Controller
     public function jadwal(Request $request)
     {
 
+        // return $request;
         if ($request->filter) {
-            $data = Jadwal::with(['angkutan', 'trayek' => function ($query) use ($request) {
-
-                if ($request->filter['s_area_keberangkatan']) {
-                    $query->where('id_area_asal', $request->filter['s_area_keberangkatan']);
-                }
-
-                if ($request->filter['s_area_tujuan']) {
-                    $query->where('id_area_tujuan', $request->filter['s_area_tujuan']);
-                }
-            }, 'jenis_kelas'])->where('tgl_keberangkatan', '=', $request->filter['s_tgl_keberangkatan'])->get();
+            $data = Jadwal::with(['angkutan', 'trayek', 'jenis_kelas'])->whereHas('trayek', function ($query) use ($request) {
+                $query->when($request->filter['s_area_keberangkatan'] != null, function ($q) use ($request) {
+                    $q->where('id_area_asal', '=', $request->filter['s_area_keberangkatan']);
+                })->when($request->filter['s_area_tujuan'] != null, function ($q) use ($request) {
+                    $q->where('id_area_tujuan', '=', $request->filter['s_area_tujuan']);
+                });
+            })->where('tgl_keberangkatan', '>=', Carbon::now())->when($request->filter['s_tgl_keberangkatan'] != null, function ($query) use ($request) {
+                $query->where('tgl_keberangkatan', 'LIKE', $request->filter['s_tgl_keberangkatan'] . '%');
+            })->get();
         } else {
-            $data = Jadwal::with(['angkutan', 'trayek', 'jenis_kelas'])->get();
+            $data = Jadwal::with(['angkutan', 'trayek', 'jenis_kelas'])->where('tgl_keberangkatan', '>=', Carbon::now())->get();
         }
-
 
         $data_baru = array();
         $multiplied = $data->map(function ($item) {
 
             $wkt = explode(" ", $item->tgl_keberangkatan);
             $tiket_tersedia = Ticket::where('id_jadwal', $item->id)->where('status_tiket', '!=', 3)->count();
+
+            $media = $item->angkutan->getMedia('foto_kendaraan')->where('model_id', $item->angkutan->id)->first();
 
             $temp['id_jadwal'] = $item->id;
             $temp['nama_angkutan'] = $item->angkutan->nama_angkutan;
@@ -69,7 +70,7 @@ class PemesananController extends Controller
             $temp['nama_trayek'] = $item->trayek->nama_trayek;
             $temp['kota_keberangkatan'] = $item->trayek->areaAsal->kabupatenKota->nama_kab_kota;
             $temp['kota_tujuan'] =  $item->trayek->areaTujuan->kabupatenKota->nama_kab_kota;
-            $temp['thumbnail'] = $item->angkutan->getMedia();
+            $temp['thumbnail'] = $media->getUrl();
             $temp['tanggal_berangkat'] = $wkt[0];
             $temp['waktu_berangkat'] = $wkt[1];
             $temp['tiket_tersedia'] = $tiket_tersedia;
@@ -163,17 +164,15 @@ class PemesananController extends Controller
     {
 
         //titik jemput
-        // $titik_jemput['lat'] = $request->detail_booking['area_jemput']['lat'];
-        // $titik_jemput['lng'] = $request->detail_booking['area_jemput']['lng'];
-        // $titik_jemput['kab_kota'] = $request->detail_booking['area_jemput']['data']['kab_kota'];
+        $titik_jemput['lat'] = $request->detail_booking['area_jemput']['lat'];
+        $titik_jemput['lng'] = $request->detail_booking['area_jemput']['lng'];
+        $titik_jemput['kab_kota'] = $request->detail_booking['area_jemput']['data']['kab_kota'];
 
         //titik antar
-        // $titik_antar['lat'] = $request->detail_booking['area_antar']['lat'];
-        // $titik_antar['lng'] = $request->detail_booking['area_antar']['lng'];
-        // $titik_antar['kab_kota'] = $request->detail_booking['area_antar']['data']['kab_kota'];
+        $titik_antar['lat'] = $request->detail_booking['area_antar']['lat'];
+        $titik_antar['lng'] = $request->detail_booking['area_antar']['lng'];
+        $titik_antar['kab_kota'] = $request->detail_booking['area_antar']['data']['kab_kota'];
 
-        $titik_antar = null;
-        $titik_jemput = null;
         $booking = Booking::create([
             'jumlah_tiket' => count($request->detail_booking['selected_seat']),
             'waktu_booking' => Carbon::now(),

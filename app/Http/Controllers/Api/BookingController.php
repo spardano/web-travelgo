@@ -16,6 +16,7 @@ class BookingController extends Controller
         $jadwal = Jadwal::find($request->id_jadwal);
         $area_persinggahan = json_decode($jadwal->trayek->area_persinggahan);
 
+
         $area_coverage = [];
         foreach ($area_persinggahan as $item) {
             $temp['area_coverage'] = $item->area_persinggahan;

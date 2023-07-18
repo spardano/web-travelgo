@@ -19,7 +19,8 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class AreaKerjaResource extends Resource
 {
     protected static ?string $model = AreaKerja::class;
-    protected static ?string $navigationGroup = 'DATA';
+
+    protected static ?string $navigationGroup = 'Masters';
     protected static ?string $navigationLabel = 'Area Kerja';
     protected static ?string $navigationIcon = 'heroicon-o-map';
 
