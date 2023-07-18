@@ -4,10 +4,12 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
-class Refund extends Model
+class Refund extends Model implements HasMedia
 {
-    use HasFactory;
+    use HasFactory, InteractsWithMedia;
     protected $table = 'refund';
 
     protected $fillable = [
@@ -18,7 +20,9 @@ class Refund extends Model
         'atas_nama',
         'status',
         'no_transaksi',
-        'alasan'
+        'alasan',
+        'alasan_penolakan',
+        'besaran_refund'
     ];
 
     public function user()

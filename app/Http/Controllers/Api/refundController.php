@@ -13,20 +13,25 @@ class refundController extends Controller
 {
     public function storeRefund(Request $request)
     {
+        $booking =  Booking::where('id', $request->id_booking)->first();
+
+        $pemotongan = (25 / 100) * $booking->total_biaya;
+        $besaran_refund = $booking->total_biaya - $pemotongan;
+
         $refund = Refund::create([
             'id_customer' => $request->user['id'],
             'id_booking' => $request->id_booking,
             'rekening' => $request->datarefund['rekening'],
             'bank' => $request->datarefund['bank'],
             'atas_nama' => $request->datarefund['atas_nama'],
-            'status' => 1,
+            'status' => 0,
             'no_transaksi' => $request->datarefund['no_transaksi'],
             'alasan' => $request->datarefund['alasan'],
+            'besaran_refund' => $besaran_refund,
         ]);
         if ($refund) {
-            Booking::where('id', $request->id_booking)->update([
-                'status' => 5
-            ]);
+            $booking->status = 5;
+            $booking->save();
             return response()->json([
                 'status' => true,
                 'massage' => "Pengajuan refun berhasil"

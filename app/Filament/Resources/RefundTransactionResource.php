@@ -4,8 +4,12 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\RefundTransactionResource\Pages;
 use App\Filament\Resources\RefundTransactionResource\RelationManagers;
+use App\Models\Booking;
 use App\Models\Refund;
 use Filament\Forms;
+use Filament\Forms\Components\Radio;
+use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Textarea;
 use Filament\Resources\Form;
 use Filament\Resources\Resource;
 use Filament\Resources\Table;
@@ -44,25 +48,60 @@ class RefundTransactionResource extends Resource
                 Tables\Columns\TextColumn::make('alasan'),
                 BadgeColumn::make('status')
                     ->enum([
-                        1 => 'Proses',
-                        2 => 'Selesai',
-                        0 => 'Ditolak'
+                        '1' => 'Disetujui',
+                        '2' => 'Ditolak',
+                        '0' => 'Proses'
                     ])
                     ->colors([
-                        'success' => 2,
-                        'danger' => 0,
-                        'primary' => 1,
+                        'success' => '1',
+                        'danger' => '2',
+                        'primary' => '0',
                     ])
             ])
             ->filters([
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make(),
+                Tables\Actions\Action::make('setujui')->icon('heroicon-o-check')->color('success')->action(function ($record): void {
+                    self::approved($record);
+                })->form([
+                    SpatieMediaLibraryFileUpload::make('bukti_refund')
+                        ->label('Upload Bukti Refund')
+                        ->required()
+                        ->collection('foto_kendaraan'),
+                ])->visible(function ($record) {
+                    return $record->status == 0;
+                }),
+                Tables\Actions\Action::make('tolak')->icon('heroicon-o-x-circle')->color('danger')->action(function ($data, $record): void {
+                    self::rejected($record, $data);
+                })->form([
+                    Textarea::make('alasan_penolakan')->label('Alasan Penolakan')->required(),
+                ])->visible(function ($record) {
+                    return $record->status == 0;
+                }),
+                // Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
+                // Tables\Actions\DeleteBulkAction::make(),
             ]);
+    }
+
+    public static function approved(Refund $record)
+    {
+        $record->status = 1;
+        $record->save();
+    }
+
+    public static function rejected($record, $data)
+    {
+        $record->alasan_penolakan = $data['alasan_penolakan'];
+        $record->status = 2;
+        $record->save();
+
+        //ubah status booking
+        Booking::where('id', $record->id_booking)->update([
+            'status' => 2
+        ]);
     }
 
     public static function getRelations(): array
@@ -79,5 +118,10 @@ class RefundTransactionResource extends Resource
             'create' => Pages\CreateRefundTransaction::route('/create'),
             'edit' => Pages\EditRefundTransaction::route('/{record}/edit'),
         ];
+    }
+
+    public static function canCreate(): bool
+    {
+        return false;
     }
 }
