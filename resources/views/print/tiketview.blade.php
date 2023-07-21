@@ -1,284 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Tiket View</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+    <style>
+    
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    
+        body,
+        html {
+            color: black;
+            font-size: 14px;
+            letter-spacing: 0.1em;
+        }
+    
+        .admit-one {
+            background-image: url("http://web-travelgo.test/assets/img/jmtlogo2.png");
+            width: 80px;
+            transform: rotate(-180deg);
+            background-size: cover;
+        }
+    
+        .admit-one span:nth-child(2) {
+            color: white;
+            font-weight: 700;
+        }
+    
+        .date {
+            border-top: 1px solid gray;
+            border-bottom: 1px solid gray;
+            padding: 5px 0;
+            font-weight: 500;
+            text-align: center;
+        }
+    
+        .date span {
+            width: 100px;
+        }
+    
+        .date span:first-child {
+            text-align: left;
+        }
+    
+        .date span:last-child {
+            text-align: right;
+        }
+    
+    
+        .show-name {
+            font-size: 16px;
+            font-family: "Nanum Pen Script", cursive;
+            color: gray;
+            text-align: center;
+            padding: 5px;
+        }
+    
+    
+        .show-name h1 {
+            font-size: 48px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            color: #4a437e;
+        }
+    
+        .time {
+            color: #4a437e;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-weight: 700;
+            padding-top: 5px;
+        }
+    
+        .time span {
+            font-weight: 400;
+            color: gray;
+        }
+    
+        .left .time {
+            font-size: 16px;
+        }
+    
+    
+        .location {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            width: 100%;
+            padding-top: 8px;
+        }
+    
+        .location .separator {
+            font-size: 20px;
+        }
+
+    
+        .right .show-name h1 {
+            font-size: 18px;
+            align-items: center;
+        }
+    
+    </style>
 </head>
+<body style="height: 100%;">
+    <table style="width: 100%; height:100%; margin:0; border-collapse:collapse;">
+        <tr>
+            <td class="admit-one">
 
-<style>
-    @import url("https://fonts.googleapis.com/css2?family=Staatliches&display=swap");
-    @import url("https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap");
-
-    * {
-        margin: 0;
-        padding: 0;
-        box-sizing: border-box;
-    }
-
-    body,
-    html {
-        height: 100vh;
-        display: grid;
-        font-family: "Staatliches", cursive;
-        background: #d83565;
-        color: black;
-        font-size: 14px;
-        letter-spacing: 0.1em;
-    }
-
-    .ticket {
-        margin: auto;
-        display: flex;
-        background: white;
-        box-shadow: rgba(0, 0, 0, 0.3) 0px 19px 38px, rgba(0, 0, 0, 0.22) 0px 15px 12px;
-    }
-
-    .left {
-        display: flex;
-    }
-
-    .image {
-
-        height: 250px;
-        opacity: 0.85;
-
-    }
-
-    .logotravel {
-        background-image: url("../assets/img/logtiket.png");
-        position: absolute;
-        color: darkgray;
-        height: 300px;
-        width: 300px;
-        display: flex;
-        text-align: center;
-        writing-mode: vertical-rl;
-        transform: rotate(-180deg);
-    }
-
-    .admit-one {
-        background-image: url("../assets/img/jmtlogo2.png");
-        position: absolute;
-        color: darkgray;
-        height: 250px;
-        width: 80px;
-        padding: 0 10px;
-        letter-spacing: 0.15em;
-        display: flex;
-        text-align: center;
-        justify-content: space-around;
-        writing-mode: vertical-rl;
-        transform: rotate(-180deg);
-        background-size: contain;
-    }
-
-    .admit-one span:nth-child(2) {
-        color: white;
-        font-weight: 700;
-    }
-
-    .left .ticket-number {
-        height: 250px;
-        width: 250px;
-        display: flex;
-        justify-content: flex-end;
-        align-items: flex-end;
-        padding: 5px;
-    }
-
-    .ticket-info {
-        padding: 10px 30px;
-        flex-direction: column;
-        justify-content: space-between;
-        margin-left: 80px;
-    }
-
-    .date {
-        border-top: 1px solid gray;
-        border-bottom: 1px solid gray;
-        padding: 5px 0;
-        font-weight: 500;
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        text-align: center;
-    }
-
-    .date span {
-        width: 100px;
-    }
-
-    .date span:first-child {
-        text-align: left;
-    }
-
-    .date span:last-child {
-        text-align: right;
-    }
-
-
-    .show-name {
-        font-size: 20px;
-        font-family: "Nanum Pen Script", cursive;
-        color: gray;
-        padding-top: 10px;
-    }
-
-
-    .show-name h1 {
-        font-size: 48px;
-        font-weight: 700;
-        letter-spacing: 0.1em;
-        color: #4a437e;
-    }
-
-    .time {
-        color: #4a437e;
-        text-align: center;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-        font-weight: 700;
-        padding-top: 5px;
-    }
-
-    .time span {
-        font-weight: 400;
-        color: gray;
-    }
-
-    .left .time {
-        font-size: 16px;
-    }
-
-
-    .location {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-        width: 100%;
-        padding-top: 8px;
-    }
-
-    .location .separator {
-        font-size: 20px;
-    }
-
-    .right {
-        width: 180px;
-        border-left: 1px dashed #404040;
-        align-items: center;
-    }
-
-
-    .right .right-info-container {
-        height: 250px;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        align-items: center;
-    }
-
-    .right .show-name h1 {
-        font-size: 18px;
-        align-items: center;
-    }
-
-    .barcode {
-        height: 60px;
-        align-items: center;
-    }
-
-    .barcode img {
-        height: 100%;
-    }
-
-    .right .ticket-number {
-        color: white;
-    }
-</style>
-
-<body>
-    <!-- partial:index.partial.html -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
-
-    <div class="ticket">
-        <div class="left">
-            <p class="admit-one">
-                {{-- <span>ADMIT ONE</span>
-                    <span>ADMIT ONE</span>
-                    <span>ADMIT ONE</span> --}}
-            </p>
-            <div class="ticket-info">
-                <p class="date">
-                    <span>Pekanbaru</span>
-                    <span>Bukittinggi</span>
-                    <span>Padang</span>
-                </p>
-                <div class="show-name">
-                    <p style="border: 2px solid #222;">
-                        <span style="font-family:'Courier New', Courier, monospace">Tanggal</span>:
-                        <span style="font-family:'Courier New', Courier, monospace; color:red">29 Januari
-                            2023</span>
+            </td>
+            <td>
+                <div>
+                    <p class="date">
+                        <span>{{$tiket->jadwal->trayek->nama_trayek}}</span>
                     </p>
+                    <div class="show-name">
+                        <p style="font-size: 12px;">
+                            <span style="font-family:'Courier New', Courier, monospace">Tanggal</span>:
+                            <span style="font-family:'Courier New', Courier, monospace; color:red">{{\Carbon\Carbon::parse($tiket->jadwal->tgl_keberangkatan)->format('d M Y')}}</span>
+                        </p>
+                    </div>
+                    <div class="show-name">
+                        <table style="margin: 10px; width:100%;">
+                            <tr>
+                                <td>Nama</td>
+                                <td style="font-weight: bold">{{ \Str::title($booking->user->name)}}</td>
+                            </tr>
+                            <tr>
+                                <td>Kelas</td>
+                                <td style="font-weight: bold">{{$tiket->jadwal->jenis_kelas->namaKelas}}</td>
+                            </tr>
+                            <tr>
+                                <td>Tujuan</td>
+                                <td style="font-weight: bold">Bukittinggi</td>
+                            </tr>
+
+                            <tr>
+                                <td>Driver</td>
+                                <td style="font-weight: bold">{{$tiket->jadwal->supirs->nama_supir}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div style="margin-bottom: 10px;" class="time">
+                        <p>Waktu Berangkat <span>@</span> {{\Carbon\Carbon::parse($tiket->jadwal->tgl_keberangkatan)->format('g:i A')}} <span style="padding-left: 35px;">
+                                status : </span> @if ($booking->status == 2)
+                                    Lunas @else Belum Lunas
+                                @endif  </p>
+                    </div>
+                    <div style="border: 1px solid #222; font-size:10px; padding-left:10px; padding-bottom:10px;">
+                        <p class="location" style="padding-top: 5px">
+                            <span>www.Jasamulya.com</span>
+                            <span class="separator">|</span>
+                            <span>www.travelgo.com</span>
+                        </p>
+                        <p class="location">
+                            <span>Mengutamakan Pelayanan Terbaik</span>
+                        </p>
+                    </div>
                 </div>
+            
+            </td>
+            <td style="background-color:darkorange; text-align:center; border-left: 2px dashed #404040;">
+                        
                 <div class="show-name">
-                    <Table>
-                        <tr>
-                            <td style="font-family:'Times New Roman', Times, serif;">Nama :</td>
-                            <td style="font-family:'Times New Roman', Times, serif;">Aldian Willia</td>
-                        </tr>
-                        <tr>
-                            <td style="font-family:'Times New Roman', Times, serif;">Kelas :</td>
-                            <td style="font-family:'Times New Roman', Times, serif;">Esekutif</td>
-                        </tr>
-                        <tr>
-                            <td style="font-family:'Times New Roman', Times, serif;">Tujuan :</td>
-                            <td style="font-family:'Times New Roman', Times, serif;">Bukittinggi</td>
-                        </tr>
-                    </Table>
-                </div>
-                <div class="time" style="padding-top: 20px;">
-                    <p style="padding-bottom: 10px;">Berangkat <span>@</span> 7:00 PM <span style="padding-left: 35px;">
-                            status : </span> Lunas</p>
-                </div>
-                <div style="border: 2px solid #222;">
-                    <p class="location" style="padding-top: 5px">
-                        <span>www.Jasamulya..com</span>
-                        <span class="separator"><i class="far fa-smile"></i></span>
-                        <span>www.travelgo.com</span>
-                    </p>
-                    <p class="location">
-                        <span>Mengutamakan Pelayanan Terbaik</span>
-                    </p>
-                </div>
-            </div>
-        </div>
-        <div class="right" style="background-color:darkorange">
-            <div class="right-info-container">
-                <div class="show-name">
-                    <img height="30px" width="180px" src="{{ asset('assets/img/fixtravelgo.png') }}" alt="">
+                    <img height="30px" width="180px" src="http://web-travelgo.test/assets/img/fixtravelgo.png" alt="">
                 </div>
                 <div class="time">
-                    <p>Inova <span>:</span> BM 1999 TL</p>
+                    <p>{{$tiket->jadwal->angkutan->nama_angkutan}} <span>:</span> {{$tiket->jadwal->angkutan->nomor_kendaraan}}</p>
                     <p>N0 Bangku :</p>
                 </div>
-                <div class="barcode" style="background-color: aliceblue; border: 2px solid #222;">
+                <div class="barcode" style="background-color: aliceblue; margin-top:10px; margin-bottom:10px;">
                     <h1
-                        style="color: dimgrey; font-family:Arial, Helvetica, sans-serif; font-size: 50px;  font-weight: 700; ">
-                        A1
+                        style="color: dimgrey; font-family:Arial, Helvetica, sans-serif; font-size: 50px;  font-weight: 700; text-align:center; ">
+                        {{$tiket->detailBangku->kode_bangku}}
                     </h1>
                 </div>
-                <p class="ticket-number">
-                    #20030220
-                </p>
-            </div>
-        </div>
-    </div>
-
+            </td>
+        </tr>
+    </table>
 </body>
-
 </html>

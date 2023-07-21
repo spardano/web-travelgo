@@ -148,26 +148,30 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Tentang Kami</h2>
+                    <h2>Aplikasi Travelgo</h2>
                 </div>
 
                 <div class="row content">
-                    <div class="col-lg-12">
-                        <p style="text-align: center; font-size:35px;"><b>PT. JASA MULYA TRAVEL</b></p>
-                        <p style="text-align: center; font-size:30px;"><b>VISI :</b></p>
-                        <p style="text-align: center; font-size:25px;"><b>Menjadikan PT. Jasa Mulya Trans Gemilang
-                                sebagai Leader Perusahaan Travel Antar Jemput Alamat di Provinsi Riau dan Sumatera
-                                Barat.</b></p>
-                        <p style="text-align: center; font-size:30px;"><b>MISI :</b></p>
-                        <p style="text-align: center; font-size:25px;"><b>• Menumbuhkan Rasa Kekeluargaan untuk
-                                membangun silaturahmi yang baik, Bagi seluruh keluarga besar PT. Jasa Mulya Trans
-                                Gemilang.</b></p>
-                        <p style="text-align: center; font-size:25px;"><b>• Memberikan Pelayanan Yang Terbaik dengan
-                                Bersikap Ramah dan Sopan terhadap Pelanggan.</b></p>
-                        <p style="text-align: center; font-size:25px;"><b>• Memberikan kesejahteraan kepada seluruh
-                                Keluarga Besar PT. Jasa Mulya Trans Gemilang.</b></p>
-                        <p style="text-align: center; font-size:30px;"><b>MOTO :</b></p>
-                        <p style="text-align: center; font-size:25px;"><b>“Your Comfortable Journey”</b></p>
+                    <div class="col-lg-12 text-center">
+
+                        <img src="{{asset('assets/img/travelgo.png')}}" width="800px" alt="">
+
+                        <div class="desc-app" style="margin-top:80px; margin-bottom:30px">
+                            <h2 style="font-weight: 700;
+                            color: #515769;
+                            line-height: 1.4;
+                            margin: 0 0 15px;">Aplikasi Pembelian Tiket TravelGO</h2>
+
+                            <p style="font-size: 15px;
+                            font-weight: 400;
+                            color: #a6a7aa;
+                            margin-bottom: 15px; width:40%; margin:0 auto;">
+                                Dengan Menggunakan aplikasi Travelgo, kamu bisa membeli tiket sesuai dengan jadwal yang kamu mau. pembayaran lebih mudah dengan metode <b>Online Payment
+                                </b> </p>
+                        </div>
+
+                        <button type="button" class="btn btn-outline-info">Install APK</button>
+
                     </div>
                 </div>
 
