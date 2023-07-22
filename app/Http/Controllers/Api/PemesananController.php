@@ -3,16 +3,12 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Livewire\Tiket;
-use App\Models\Angkutan;
 use App\Models\Bangku;
 use App\Models\Booking;
 use App\Models\BookingDetail;
-use App\Models\DetailBangku;
 use App\Models\Jadwal;
 use App\Models\PaymentTransactions;
 use App\Models\Ticket;
-use App\Models\Trayek;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
@@ -123,11 +119,17 @@ class PemesananController extends Controller
     public function getBooking(Request $request)
     {
 
-        $listbooking = Booking::with(['bookingDetail.ticket.detailBangku'])->where('id_customer', $request->id)->orderBy('created_at', 'desc')->get();
+        $listbooking = Booking::with(['bookingDetail.ticket.detailBangku', 'paymentTransaction'])->where('id_customer', $request->id)->orderBy('created_at', 'desc')->get();
 
         $multiplied = $listbooking->map(function ($item) {
 
             $bookingDetail = BookingDetail::with('ticket.jadwal.trayek')->where('id', $item->bookingDetail[0]->id)->first();
+
+            $jadwal = Jadwal::find($bookingDetail->ticket->jadwal['id']);
+            $media = $jadwal->angkutan->getMedia('foto_kendaraan')->where('model_id', $jadwal->angkutan->id)->first();
+
+
+
             $wkt = explode(" ", $bookingDetail->ticket->jadwal->tgl_keberangkatan);
             $temp['nama_trayek'] = $bookingDetail->ticket->jadwal->trayek ? $bookingDetail->ticket->jadwal->trayek->nama_trayek : null;
             $temp['id_booking'] = $item->id;
@@ -139,8 +141,9 @@ class PemesananController extends Controller
             $temp['tanggal_berangkat'] = $wkt[0];
             $temp['waktu_berangkat'] = $wkt[1];
             $temp['status'] = $item->status;
-
+            $temp['thumbnail'] = $media->getUrl();
             $temp['tiket'] = $temp;
+            $temp['payment_number'] = $item->paymentTransaction->number;
 
             return $temp;
         });
@@ -296,8 +299,7 @@ class PemesananController extends Controller
 
     public function checkStatusPayment(Request $request)
     {
-
-        $status = \Midtrans\Transaction::status($request->id_booking);
+        $status = \Midtrans\Transaction::status($request->payment_number);
         if ($status) {
             return response()->json([
                 'status' => true,

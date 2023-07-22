@@ -67,10 +67,9 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
-                    <li><a class="nav-link scrollto" href="#about">Tetang</a></li>
+                    <li><a class="nav-link scrollto" href="#about">Aplikasi</a></li>
                     <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
-                    <li><a class="nav-link scrollto" href="{{ url('tiketing') }}">tiket</a></li>
-                    <li><a class="nav-link scrollto" href="{{ url('invoice') }}">invoice</a></li>
+                    <li><a class="nav-link scrollto" href="#jadwal" >Jadwal</a></li>
                     <li><a class="nav-link scrollto" href="#kontak">Kontak</a></li>
                     <li><a class="getstarted scrollto" href="{{ url('admin') }}">Admin Login</a></li>
                 </ul>
@@ -232,6 +231,19 @@
 
             </div>
         </section><!-- End Services Section -->
+
+        <section id="jadwal">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>Jadwal Keberangkatan</h2>
+                    <p>Temukan jadwal keberangkatan, kota penjemputan, kota pengantaran yang sesuai dengan kebutuhanmu </p>
+                </div>
+
+                <div class="row">
+                    
+                </div>
+            </div>
+        </section>
 
         <!-- ======= Team Section ======= -->
         <section id="kontak" class="team section-bg">

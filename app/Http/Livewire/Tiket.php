@@ -5,10 +5,11 @@ namespace App\Http\Livewire;
 use App\Models\Booking;
 use App\Models\BookingDetail;
 use App\Models\DetailBangku;
+use App\Models\PaymentTransactions;
 use App\Models\Ticket;
-use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
 use Livewire\Component;
+use Illuminate\Support\Str;
 
 class Tiket extends Component
 {
@@ -88,6 +89,15 @@ class Tiket extends Component
             'status' => $this->status,
         ]);
 
+        //data transaksi
+        PaymentTransactions::create([
+            'number' => Str::orderedUuid(),
+            'id_booking' => $booking->id,
+            'id_customer' => 0,
+            'gross_amount' => $booking->total_biaya,
+            'payment_status' => 1,
+        ]);
+
         BookingDetail::updateOrCreate([
             'id' => $this->id_booking_detail,
             'id_booking' => $booking->id,
@@ -145,6 +155,10 @@ class Tiket extends Component
         $bookingDetail = BookingDetail::where('id_booking', $id_booking)->first();
         Ticket::where('id', $bookingDetail->id_tiket)->update([
             'status_tiket' => 3
+        ]);
+
+        PaymentTransactions::where('id_booking', $id_booking)->update([
+            'payment_status' => 2
         ]);
 
         session()->flash('success', 'Berhasil mengkomfirmasi pembookingan');
