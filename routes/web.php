@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\invoiceController;
+use App\Http\Controllers\jadwalController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentCallbackController;
 use App\Http\Controllers\tiketviewController;
@@ -19,9 +20,11 @@ use Illuminate\Support\Facades\Route;
 */
 
 //hello
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
+Route::get('/', [jadwalController::class, 'jadwal']);
 
 // Route::get('testps', function () {
 //     return Hash::make('Aldian8899');

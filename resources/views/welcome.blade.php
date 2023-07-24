@@ -69,7 +69,7 @@
                     <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
                     <li><a class="nav-link scrollto" href="#about">Aplikasi</a></li>
                     <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
-                    <li><a class="nav-link scrollto" href="#jadwal" >Jadwal</a></li>
+                    <li><a class="nav-link scrollto" href="#jadwal">Jadwal</a></li>
                     <li><a class="nav-link scrollto" href="#kontak">Kontak</a></li>
                     <li><a class="getstarted scrollto" href="{{ url('admin') }}">Admin Login</a></li>
                 </ul>
@@ -153,19 +153,23 @@
                 <div class="row content">
                     <div class="col-lg-12 text-center">
 
-                        <img src="{{asset('assets/img/travelgo.png')}}" width="800px" alt="">
+                        <img src="{{ asset('assets/img/travelgo.png') }}" width="800px" alt="">
 
                         <div class="desc-app" style="margin-top:80px; margin-bottom:30px">
-                            <h2 style="font-weight: 700;
+                            <h2
+                                style="font-weight: 700;
                             color: #515769;
                             line-height: 1.4;
-                            margin: 0 0 15px;">Aplikasi Pembelian Tiket TravelGO</h2>
+                            margin: 0 0 15px;">
+                                Aplikasi Pembelian Tiket TravelGO</h2>
 
-                            <p style="font-size: 15px;
+                            <p
+                                style="font-size: 15px;
                             font-weight: 400;
                             color: #a6a7aa;
                             margin-bottom: 15px; width:40%; margin:0 auto;">
-                                Dengan Menggunakan aplikasi Travelgo, kamu bisa membeli tiket sesuai dengan jadwal yang kamu mau. pembayaran lebih mudah dengan metode <b>Online Payment
+                                Dengan Menggunakan aplikasi Travelgo, kamu bisa membeli tiket sesuai dengan jadwal yang
+                                kamu mau. pembayaran lebih mudah dengan metode <b>Online Payment
                                 </b> </p>
                         </div>
 
@@ -232,18 +236,47 @@
             </div>
         </section><!-- End Services Section -->
 
-        <section id="jadwal">
+        <section id="jadwal" class="services section-bg">
             <div class="container" data-aos="fade-up">
                 <div class="section-title">
                     <h2>Jadwal Keberangkatan</h2>
-                    <p>Temukan jadwal keberangkatan, kota penjemputan, kota pengantaran yang sesuai dengan kebutuhanmu </p>
+                    <p>Temukan jadwal keberangkatan, kota penjemputan, kota pengantaran yang sesuai dengan kebutuhanmu
+                    </p>
                 </div>
-
-                <div class="row">
-                    
-                </div>
+                @foreach ($data_baru as $item)
+                    <div class="row" style="padding-bottom: 10px;">
+                        <div class="col-xl-12 col-md-12  align-items-stretch" data-aos="zoom-in"
+                            data-aos-delay="100">
+                            <div class="icon-box">
+                                <div class="row">
+                                    <div class="col-xl-4">
+                                        <h4>
+                                            @php
+                                                // Menggunakan Carbon untuk memanipulasi tanggal_berangkat
+                                                $tanggalBerangkat = \Illuminate\Support\Carbon::parse($item['tanggal_berangkat']);
+                                                $waktuBerangkat = \Illuminate\Support\Carbon::parse($item['waktu_berangkat']);
+                                            @endphp
+                                            <a href="">{{ $tanggalBerangkat->format('d M Y') }}</a>
+                                        </h4>
+                                        <h5 style="text-transform: uppercase">{{ $item['nama_trayek'] }}</h5>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <h5>Angkutan: {{ $item['nama_angkutan'] }}</h5>
+                                        <h5>{{ $item['kelas'] }}</h5>
+                                        <h5>Berangkat : {{ $waktuBerangkat->format('H:i') }}</h5>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <h5>Tiket Tersedia:</h5>
+                                        <h1>{{ $item['tiket_tersedia'] }}</h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </section>
+
 
         <!-- ======= Team Section ======= -->
         <section id="kontak" class="team section-bg">
