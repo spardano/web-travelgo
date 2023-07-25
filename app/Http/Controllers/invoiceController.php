@@ -11,8 +11,6 @@ class invoiceController extends Controller
 {
     public function invoice($id_booking)
     {
-
-
         $booking = Booking::find($id_booking);
 
         return Pdf::loadView('print.invoice', ['booking' => $booking])->stream();

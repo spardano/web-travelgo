@@ -4,8 +4,12 @@ use App\Http\Controllers\invoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentCallbackController;
 use App\Http\Controllers\tiketviewController;
-use Illuminate\Support\Facades\Hash;
+use App\Mail\bookedEmail;
+use App\Mail\confirmPaymentMail;
+use App\Models\Booking;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Mail;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,9 +27,17 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Route::get('testps', function () {
-//     return Hash::make('Aldian8899');
-// });
+Route::get('test-email', function () {
+    $id_booking = 42;
+    // $booking = Booking::find($id_booking);
+    // $pdfInvoice = Pdf::loadView('print.invoice', ['booking' => $booking]);
+
+    Mail::to('sakti.pardano29@gmail.com')->send(new confirmPaymentMail($id_booking));
+
+    dd("Email is Sent.");
+});
+
+
 
 Route::get('/seat-modal', function () {
     return view('modal.seat-modal');

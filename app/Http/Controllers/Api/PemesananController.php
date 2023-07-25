@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Mail\bookedEmail;
 use App\Models\Bangku;
 use App\Models\Booking;
 use App\Models\BookingDetail;
@@ -13,6 +14,7 @@ use Carbon\Carbon;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 
 class PemesananController extends Controller
@@ -209,6 +211,9 @@ class PemesananController extends Controller
                 'gross_amount' => $booking->total_biaya,
                 'payment_status' => 1,
             ]);
+
+            //send email;
+            Mail::to($request->user['email'])->send(new bookedEmail($booking->id));
         }
 
         return response()->json([

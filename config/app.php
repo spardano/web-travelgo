@@ -54,9 +54,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://web-travelgo.test/'),
+    'url' => env('APP_URL', 'https://fade-114-4-245-170.ngrok-free.app'),
 
-    'asset_url' => env('ASSET_URL', 'http://web-travelgo.test/'),
+    'asset_url' => env('ASSET_URL', 'https://fade-114-4-245-170.ngrok-free.app'),
 
     /*
     |--------------------------------------------------------------------------

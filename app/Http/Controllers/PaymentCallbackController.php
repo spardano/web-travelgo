@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\confirmPaymentMail;
 use App\Models\Booking;
 use App\Models\PaymentTransactions;
 use App\Models\Ticket;
 use App\Services\Midtrans\CallbackService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class PaymentCallbackController extends Controller
 {
@@ -34,6 +36,9 @@ class PaymentCallbackController extends Controller
                 }
 
                 $booking->save();
+
+                //send confirmation email
+                Mail::to($booking->user->email)->send(new confirmPaymentMail($booking->id));
             }
 
             if ($callback->isExpire()) {
