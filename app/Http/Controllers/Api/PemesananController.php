@@ -178,6 +178,7 @@ class PemesananController extends Controller
         $titik_antar['lng'] = $request->detail_booking['area_antar']['lng'];
         $titik_antar['kab_kota'] = $request->detail_booking['area_antar']['data']['kab_kota'];
 
+
         $booking = Booking::create([
             'jumlah_tiket' => count($request->detail_booking['selected_seat']),
             'waktu_booking' => Carbon::now(),
@@ -185,6 +186,7 @@ class PemesananController extends Controller
             'total_biaya' => $request->total_harga,
             'titik_jemput' => json_encode($titik_jemput),
             'titik_antar' => json_encode($titik_antar),
+            'tk_biaya' => $request->tk_biaya,
             'status' => 1
         ]);
 

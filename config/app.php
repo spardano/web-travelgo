@@ -54,9 +54,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://fade-114-4-245-170.ngrok-free.app'),
+    'url' => env('APP_URL', 'https://5aad-114-4-245-170.ngrok-free.app'),
 
-    'asset_url' => env('ASSET_URL', 'https://fade-114-4-245-170.ngrok-free.app'),
+    'asset_url' => env('ASSET_URL', 'https://5aad-114-4-245-170.ngrok-free.app'),
 
     /*
     |--------------------------------------------------------------------------
