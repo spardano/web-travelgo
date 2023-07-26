@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'name' => env('APP_NAME', 'Laravel'),
+    'name' => env('APP_NAME', 'TravelGo'),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,9 +54,9 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'https://fade-114-4-245-170.ngrok-free.app'),
+    'url' => env('APP_URL', 'https://jmtravel.pocari.id/'),
 
-    'asset_url' => env('ASSET_URL', 'https://fade-114-4-245-170.ngrok-free.app'),
+    'asset_url' => env('ASSET_URL', 'https://jmtravel.pocari.id/'),
 
     /*
     |--------------------------------------------------------------------------
