@@ -299,6 +299,28 @@
                         </tr>
                     @endif
 
+
+                    {{-- biaya admin --}}
+                    @if ($booking->tk_biaya != null)
+                        <tr style="text-align:center;">
+                            <td style="border-bottom: 1px solid gray;">
+                                <p>{{$no+1}}</p>
+                            </td>
+                            <td style="border-bottom: 1px solid gray;">
+                                <p class="bold">Pengurangan Biaya</p>
+                            </td>
+                            <td style="border-bottom: 1px solid gray;">
+                                <p>Rp. {{ number_format($booking->tk_biaya)}}</p>
+                            </td>
+                            <td style="border-bottom: 1px solid gray;">
+                                {{-- <p>1</p> --}}
+                            </td>
+                            <td style="border-bottom: 1px solid gray;">
+                                <p>Rp. {{ number_format($booking->tk_biaya)}}</p>
+                            </td>
+                        </tr>
+                    @endif
+
                 </table>
 
                 <table style="width: 100%">
@@ -324,7 +346,6 @@
                         </td>
                     </tr>
                 </table>
-
             </div>
             <div class="footer">
                 <p style="color: red">Perhatian!!!</p>
