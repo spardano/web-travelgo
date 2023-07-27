@@ -2,11 +2,11 @@
 
 namespace App\Policies;
 
-use App\Models\JenisKelas;
+use App\Models\PaymentTransactions;
 use App\Models\User;
 use Illuminate\Auth\Access\Response;
 
-class JenisKelasPolicy
+class PaymentTransactionPolicy
 {
     /**
      * Determine whether the user can view any models.
@@ -19,7 +19,7 @@ class JenisKelasPolicy
     /**
      * Determine whether the user can view the model.
      */
-    public function view(User $user, JenisKelas $jenisKelas): bool
+    public function view(User $user, PaymentTransactions $paymentTransactions): bool
     {
         return $user->hasRole(['Super Admin', 'Admin Operator']);
     }
@@ -35,7 +35,7 @@ class JenisKelasPolicy
     /**
      * Determine whether the user can update the model.
      */
-    public function update(User $user, JenisKelas $jenisKelas): bool
+    public function update(User $user, PaymentTransactions $paymentTransactions): bool
     {
         return $user->hasRole(['Super Admin', 'Admin Operator']);
     }
@@ -43,24 +43,24 @@ class JenisKelasPolicy
     /**
      * Determine whether the user can delete the model.
      */
-    public function delete(User $user, JenisKelas $jenisKelas): bool
+    public function delete(User $user, PaymentTransactions $paymentTransactions): bool
     {
-        return $user->hasRole(['Super Admin', 'Admin Operator']);
+        return $user->hasRole('Super Admin');
     }
 
     /**
      * Determine whether the user can restore the model.
      */
-    public function restore(User $user, JenisKelas $jenisKelas): bool
+    public function restore(User $user, PaymentTransactions $paymentTransactions): bool
     {
-        return $user->hasRole(['Super Admin']);
+        return $user->hasRole('Super Admin');
     }
 
     /**
      * Determine whether the user can permanently delete the model.
      */
-    public function forceDelete(User $user, JenisKelas $jenisKelas): bool
+    public function forceDelete(User $user, PaymentTransactions $paymentTransactions): bool
     {
-        return $user->hasRole(['Super Admin']);
+        return $user->hasRole('Super Admin');
     }
 }

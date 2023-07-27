@@ -27,18 +27,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('test-email', function () {
-    $id_booking = 42;
-    // $booking = Booking::find($id_booking);
-    // $pdfInvoice = Pdf::loadView('print.invoice', ['booking' => $booking]);
-
-    Mail::to('sakti.pardano29@gmail.com')->send(new confirmPaymentMail($id_booking));
-
-    dd("Email is Sent.");
-});
-
-
-
 Route::get('/seat-modal', function () {
     return view('modal.seat-modal');
 });
