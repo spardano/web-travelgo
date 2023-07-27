@@ -14,15 +14,18 @@ class BookingController extends Controller
     function checkGeometry(Request $request)
     {
         $jadwal = Jadwal::find($request->id_jadwal);
-        $area_persinggahan = json_decode($jadwal->trayek->area_persinggahan);
 
+            $area_persinggahan = json_decode($jadwal->trayek->area_persinggahan);
 
-        $area_coverage = [];
-        foreach ($area_persinggahan as $item) {
-            $temp['area_coverage'] = $item->area_persinggahan;
-            $temp['tk_biaya'] = $item->tk_biaya;
-            array_push($area_coverage, $temp);
-        }
+            $area_coverage = [];
+            foreach ($area_persinggahan as $item) {
+                if($item->area_persinggahan != null){
+                    $temp['area_coverage'] = $item->area_persinggahan;
+                    $temp['tk_biaya'] = $item->tk_biaya;
+                    array_push($area_coverage, $temp);
+                }
+            }
+        
 
         if ($request->type == 'penjemputan') {
             $init_asal['area_coverage'] = $jadwal->trayek->id_area_asal;
@@ -30,6 +33,7 @@ class BookingController extends Controller
             array_push($area_coverage, $init_asal);
 
             foreach ($area_coverage as $area) {
+
                 $raw = DB::select("select ST_AsGeoJson(geometri_number) as geom from area_kerjas where id = ?", [$area['area_coverage']])[0]->geom;
                 $areakerja = AreaKerja::find($area['area_coverage']);
 

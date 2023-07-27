@@ -191,10 +191,10 @@
 
                     <tr>
                         <td>
-                            <img src="{{ public_path('assets\img\fixtravelgo.png') }}" width="250px;" height="50px;">
+                            <img src="{{ asset('assets\img\fixtravelgo.png') }}" width="250px;" height="50px;">
                         </td>
                         <td style="text-align: right;">
-                            <img src="{{ public_path('assets\img\logojmt2.png') }}" width="80px;" height="100px;">
+                            <img src="{{ asset('assets\img\logojmt2.png') }}" width="80px;" height="100px;">
                         </td>
                     </tr>
 

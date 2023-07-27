@@ -3,7 +3,7 @@
 use Illuminate\Contracts\Http\Kernel;
 use Illuminate\Http\Request;
 
-header('Access-Control-Allow-Headers: origin, x-requested-with, content-type');
+header('Access-Control-Allow-Headers: *');
 header('Access-Control-Allow-Methods: PUT, GET, POST, DELETE, OPTIONS');
 define('LARAVEL_START', microtime(true));
 
