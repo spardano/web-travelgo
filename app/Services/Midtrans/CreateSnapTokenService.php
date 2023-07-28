@@ -39,7 +39,7 @@ class CreateSnapTokenService extends Midtrans
 
             'customer_details' => [
                 'first_name' => $name[0],
-                'last_name' => $name[1] ? $name[1] : null,
+                'last_name' => isset($name[1])? $name[1] : null,
                 'email' => $user['email'],
                 'phone' => "082283445039",
             ]
