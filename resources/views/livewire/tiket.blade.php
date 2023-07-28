@@ -150,8 +150,6 @@
                         </button>
                     </div>
                 </div>
-
-
             </form>
         </div>
     @endif
@@ -318,7 +316,4 @@
             </div>
         @endforeach
 
-        <div class="py-4">
-            @include('components.alert')
-        </div>
     </div>

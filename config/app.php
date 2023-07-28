@@ -54,6 +54,10 @@ return [
     |
     */
 
+    // 'url' => env('APP_URL', 'http://web-travelgo.test/'),
+
+    // 'asset_url' => env('ASSET_URL', 'http://web-travelgo.test/'),
+
     'url' => env('APP_URL', 'https://jmtravel.pocari.id/'),
 
     'asset_url' => env('ASSET_URL', 'https://jmtravel.pocari.id/'),
