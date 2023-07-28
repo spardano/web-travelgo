@@ -31,6 +31,7 @@ Route::prefix('guest')->group(function () {
     Route::post('register', [AuthMobileController::class, 'registration']);
     Route::post('checktoken', [AuthMobileController::class, 'checkToken']);
     Route::get('getkabkota', [HelperController::class, 'getKabKota']);
+    Route::post('login-via-google', [AuthMobileController::class, 'loginViaGoogle']);
 });
 
 //dengan middleware

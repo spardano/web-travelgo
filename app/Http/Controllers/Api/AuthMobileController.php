@@ -74,12 +74,49 @@ class AuthMobileController extends Controller
     }
 
 
+    public function loginViaGoogle(Request $request)
+    {
+        $checkUser = User::where('email', $request->email)->first();
+
+        if ($checkUser) {
+
+            if (!$checkUser->google_id) {
+                $checkUser->google_id = $request->user_id;
+                $checkUser->save();
+            }
+
+            $user = $checkUser;
+        } else {
+
+            $createUser = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'google_id' => $request->user_id,
+                'password' => Hash::make('travelgo123'),
+                'email_verified_at' => Carbon::now(),
+            ]);
+
+            $user = $createUser;
+        }
+
+        // Simpan Login Logs berserta token
+        $token = $this->crypt->crypt(Carbon::now());
+        LoginLogs::create([
+            'user_id' => $user->id,
+            'token' => $token,
+            'devices' => $_SERVER['HTTP_USER_AGENT'],
+            'status' => 1
+        ]);
+
+        $this->respondWithToken($token, $user);
+    }
+
+
     public function logout(Request $request)
     {
         try {
 
             $setStatusToFalse = LoginLogs::where('user_id', $request->user['id'])->where('token', $request->access_token)->first();
-
             $setStatusToFalse->update([
                 "status" => 0
             ]);

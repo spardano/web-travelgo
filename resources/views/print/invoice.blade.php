@@ -189,14 +189,14 @@
 
                 <table style="width: 100%">
 
-                    <tr>
+                    {{-- <tr>
                         <td>
                             <img src="{{ asset('assets\img\fixtravelgo.png') }}" width="250px;" height="50px;">
                         </td>
                         <td style="text-align: right;">
                             <img src="{{ asset('assets\img\logojmt2.png') }}" width="80px;" height="100px;">
                         </td>
-                    </tr>
+                    </tr> --}}
 
                     <tr>
                         <td>
