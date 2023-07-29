@@ -190,6 +190,8 @@ class AuthMobileController extends Controller
 
         if ($user) {
 
+            $user->sendEmailVerificationNotification();
+
             $user->assignRole('Customer');
 
             return response()->json(([
