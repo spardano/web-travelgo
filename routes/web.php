@@ -4,8 +4,10 @@ use App\Http\Controllers\invoiceController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentCallbackController;
 use App\Http\Controllers\tiketviewController;
+use App\Http\Controllers\AuthController;
 use App\Mail\bookedEmail;
 use App\Mail\confirmPaymentMail;
+use App\Mail\verifyEmail;
 use App\Models\Booking;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Route;
@@ -40,3 +42,9 @@ Route::get('payment/{payment_number}', [OrderController::class, 'show']);
 Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
 Route::get('payments/success', [PaymentCallbackController::class, 'success'])->name('payment-success');
 Route::get('payments/error', [PaymentCallbackController::class, 'error'])->name('payment-error');
+Route::get('verify/email/{token}', [AuthController::class, 'verify'])->name('verify-email');
+Route::get('test-email', function () {
+
+    Mail::to('sakti.pardano29@gmail.com')->send(new verifyEmail(2));
+    return 'email sent';
+});

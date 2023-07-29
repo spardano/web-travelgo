@@ -189,15 +189,6 @@
 
                 <table style="width: 100%">
 
-                    {{-- <tr>
-                        <td>
-                            <img src="{{ asset('assets\img\fixtravelgo.png') }}" width="250px;" height="50px;">
-                        </td>
-                        <td style="text-align: right;">
-                            <img src="{{ asset('assets\img\logojmt2.png') }}" width="80px;" height="100px;">
-                        </td>
-                    </tr> --}}
-
                     <tr>
                         <td>
                             <div class="bill_sec" style="padding-left: 20px">
@@ -230,6 +221,7 @@
                         $no = 0;
                         $penambahan_biaya = 0;
                     @endphp
+                    
                     {{-- Produk Tiket --}}
                     @foreach ($booking->bookingDetail as $index => $item)
                     <tr style="text-align:center;">

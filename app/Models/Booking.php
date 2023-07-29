@@ -17,6 +17,7 @@ class Booking extends Model
         'titik_antar',
         'total_biaya',
         'status',
+        'tk_biaya',
     ];
 
     public function bookingDetail()

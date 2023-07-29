@@ -21,7 +21,6 @@
                         <div class="text-center">
                             <h1>Ooopss !</h1>
                             <p>Sepertinya terjadi kesalahan, tapi tenanng, kamu bisa ulangi lagi kok</p>
-                            {{-- <button class="btn btn-outline-success">Back Home</button> --}}
                         </div>
                     </div>
                 </div>
