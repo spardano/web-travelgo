@@ -18,6 +18,7 @@ class Booking extends Model
         'total_biaya',
         'biaya_admin',
         'status',
+        'tk_biaya',
     ];
 
     public function bookingDetail()

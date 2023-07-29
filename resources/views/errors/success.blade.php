@@ -24,8 +24,8 @@
                             </svg>
                         </div>
                         <div class="text-center">
-                            <h1>Terimakasih !</h1>
-                            <p>Pembayaran kamu sudah kami terima, semoga penjalananmu menyenangkan</p>
+                            <h1>Berhasil !</h1>
+                            <p>{{ $message }}</p>
                         </div>
                     </div>
                 </div>

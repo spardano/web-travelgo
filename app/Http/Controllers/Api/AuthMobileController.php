@@ -11,6 +11,8 @@ use Exception;
 use Filament\Facades\Filament;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\verifyEmail;
 
 class AuthMobileController extends Controller
 {
@@ -53,14 +55,14 @@ class AuthMobileController extends Controller
         } else {
 
             //jika pengguna belum terverifikasi
-            //if ($user->email_verified_at == null) {
+            if ($user->email_verified_at == null) {
 
-            //    return response()->json([
-            //        'status' => false,
-            //        'code' => 'unverified',
-            //        "message" => "Verifikasi Email Terlebih dahulu."
-            //    ]);
-            //}
+               return response()->json([
+                   'status' => false,
+                   'code' => 'unverified',
+                   "message" => "Verifikasi Email Terlebih dahulu."
+               ]);
+            }
 
             $token = $this->crypt->crypt(Carbon::now());
 
@@ -194,12 +196,12 @@ class AuthMobileController extends Controller
         if ($user) {
 
             $user->assignRole('Customer');
-            $user->sendEmailVerificationNotification();
+            Mail::to($user->email)->send(new verifyEmail($user->id));
 
             return response()->json(([
                 'status' => true,
                 'data' => $user,
-                'message' => 'Berhasil registrasi akun',
+                'message' => 'Berhasil registrasi akun, Periksa Email dan lakukan verifikasi',
             ]));
         }
 
@@ -304,5 +306,24 @@ class AuthMobileController extends Controller
             'status' => false,
             'message' => 'Password yang anda masukan tidak benar'
         ]);
+    }
+
+    public function resendEmailVerification(Request $request){
+        $user = User::where('email', $request->email)->first();
+
+        if(!$user){
+            return response()->json([
+                'status' => false,
+                'message' => 'Email Tidak dikenali'
+            ]);
+        }
+
+        Mail::to($user->email)->send(new verifyEmail($user->id));
+
+        return response()->json([
+            'status' => true,
+            'message' => 'Email Berhasil dikirimkan kembali, silahkan periksa kotak masuk',
+        ]);
+
     }
 }
