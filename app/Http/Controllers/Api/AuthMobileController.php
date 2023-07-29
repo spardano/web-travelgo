@@ -38,6 +38,7 @@ class AuthMobileController extends Controller
         if (!$user) {
             return response()->json([
                 "status" => false,
+                "code" => 'email-not-found',
                 "message" => "Email tidak ditemukan"
             ]);
         }
@@ -46,18 +47,21 @@ class AuthMobileController extends Controller
 
             return response()->json([
                 "status" => false,
+                'code' => 'wrong-password',
                 "message" => "Password atau email salah, perhatikan kembali data yang anda inputkan"
             ]);
+
         } else {
 
             //jika pengguna belum terverifikasi
-            // if ($user->email_verified_at == null) {
+            //if ($user->email_verified_at == null) {
 
-            //     return response()->json([
-            //         'status' => false,
-            //         "message" => "Anda belum melakukan verifikasi email."
-            //     ]);
-            // }
+            //    return response()->json([
+            //        'status' => false,
+            //        'code' => 'unverified',
+            //        "message" => "Verifikasi Email Terlebih dahulu."
+            //    ]);
+            //}
 
             $token = $this->crypt->crypt(Carbon::now());
 
@@ -98,7 +102,7 @@ class AuthMobileController extends Controller
 
             $user = $createUser;
         }
-
+ 
         // Simpan Login Logs berserta token
         $token = $this->crypt->crypt(Carbon::now());
         LoginLogs::create([
@@ -108,7 +112,7 @@ class AuthMobileController extends Controller
             'status' => 1
         ]);
 
-        $this->respondWithToken($token, $user);
+        return $this->respondWithToken($token, $user);
     }
 
 
@@ -193,6 +197,7 @@ class AuthMobileController extends Controller
             $user->sendEmailVerificationNotification();
 
             $user->assignRole('Customer');
+            $user->sendEmailVerificationNotification();
 
             return response()->json(([
                 'status' => true,
