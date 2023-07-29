@@ -29,20 +29,28 @@ class bookedEmail extends Mailable
     {
         $booking = Booking::where('id', $id_booking)->first();
 
+
+        //kota keberangkatan dan tujuan
+        if ($booking->titik_jemput) {
+            $titik_jemput = json_decode($booking->titik_jemput, true);
+            $kota_keberangkatan = $titik_jemput['kab_kota'];
+        }
+
+        if ($booking->titik_antar) {
+            $titik_antar = json_decode($booking->titik_antar, true);
+            $kota_tujuan = $titik_antar['kab_kota'];
+        }
+
         $temp['nama_customer'] = $booking->user->name;
         $temp['email'] = $booking->user->email;
-        $temp['kota_keberangkatan'] = $booking->bookingDetail[0]->ticket->jadwal->trayek->areaAsal->kabupatenKota->nama_kab_kota;
-        $temp['kota_tujuan'] = $booking->bookingDetail[0]->ticket->jadwal->trayek->areaTujuan->kabupatenKota->nama_kab_kota;
+        $temp['kota_keberangkatan'] = isset($kota_keberangkatan) ? $kota_keberangkatan : null;
+        $temp['kota_tujuan'] = isset($kota_tujuan) ? $kota_tujuan : null;
         $temp['tgl_keberangkatan'] = $booking->tgl_keberangkatan;
         $temp['driver'] = $booking->bookingDetail[0]->ticket->jadwal->supirs->nama_supir;
         $temp['nama_angkutan'] = $booking->bookingDetail[0]->ticket->jadwal->angkutan->nama_angkutan;
         $temp['total_harga'] = $booking->total_biaya;
-
-        $biaya_admin = 0;
-        if ($booking->paymentTransaction->snap_token != null) {
-            $biaya_admin = 6500;
-        }
-        $temp['biaya_admin'] = $biaya_admin;
+        $temp['biaya_admin'] = $booking->biaya_admin ? $booking->biaya_admin : 0;
+        $temp['tk_biaya'] = $booking->tk_biaya ? $booking->tk_biaya : 0;
 
         $tiket = array();
         foreach ($booking->bookingDetail as $item) {
@@ -53,6 +61,8 @@ class bookedEmail extends Mailable
             array_push($tiket, $temp_tiket);
         }
         $temp['tiket'] = $tiket;
+
+        // dd($temp);
 
         return $this->data = $temp;
         // $this->data = $data_baru;

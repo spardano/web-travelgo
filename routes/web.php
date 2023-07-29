@@ -40,3 +40,9 @@ Route::get('payment/{payment_number}', [OrderController::class, 'show']);
 Route::post('payments/midtrans-notification', [PaymentCallbackController::class, 'receive']);
 Route::get('payments/success', [PaymentCallbackController::class, 'success'])->name('payment-success');
 Route::get('payments/error', [PaymentCallbackController::class, 'error'])->name('payment-error');
+
+
+Route::get('test-email', function () {
+    // Mail::to('sakti.pardano29@gmail.com')->send(new bookedEmail(53));
+    Mail::to('sakti.pardano29@gmail.com')->send(new confirmPaymentMail(56));
+});

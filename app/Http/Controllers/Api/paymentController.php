@@ -22,6 +22,9 @@ class paymentController extends Controller
             'payment_status' => 1,
         ]);
 
+        $booking->biaya_admin = 6500;
+        $booking->save();
+
         if ($payment) {
             return response()->json([
                 'status' => true,

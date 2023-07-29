@@ -257,44 +257,25 @@
 
                     @endforeach
 
-                    {{-- Penambahan Biaya --}}
-                    @if ($penambahan_biaya != 0)
-                        <tr style="text-align:center;">
-                            <td style="border-bottom: 1px solid gray;">
-                                <p>{{$no+1}}</p>
-                            </td>
-                            <td style="border-bottom: 1px solid gray;">
-                                <p class="bold">Penambahan Biaya</p>
-                            </td>
-                            <td style="border-bottom: 1px solid gray;">
-                                <p>Rp. {{ number_format(6500)}}</p>
-                            </td>
-                            <td style="border-bottom: 1px solid gray;">
-                                {{-- <p>1</p> --}}
-                            </td>
-                            <td style="border-bottom: 1px solid gray;">
-                                <p>Rp. {{ number_format(6500)}}</p>
-                            </td>
-                        </tr>
-                    @endif
+                    
 
                     {{-- biaya admin --}}
-                    @if ($booking->paymentTransaction->snap_token != null)
+                    @if ($booking->biaya_admin != null)
                         <tr style="text-align:center;">
                             <td style="border-bottom: 1px solid gray;">
                                 <p>{{$no+1}}</p>
                             </td>
                             <td style="border-bottom: 1px solid gray;">
-                                <p class="bold">Biaya Admin</p>
+                                <p class="bold">Biaya Admin</p> 
                             </td>
                             <td style="border-bottom: 1px solid gray;">
-                                <p>Rp. {{ number_format(6500)}}</p>
+                                <p>Rp. {{ number_format($booking->biaya_admin)}}</p>
                             </td>
                             <td style="border-bottom: 1px solid gray;">
                                 {{-- <p>1</p> --}}
                             </td>
                             <td style="border-bottom: 1px solid gray;">
-                                <p>Rp. {{ number_format(6500)}}</p>
+                                <p>Rp. {{ number_format($booking->biaya_admin)}}</p>
                             </td>
                         </tr>
                     @endif
@@ -307,7 +288,11 @@
                                 <p>{{$no+1}}</p>
                             </td>
                             <td style="border-bottom: 1px solid gray;">
-                                <p class="bold">Pengurangan Biaya</p>
+                                @if ($booking->tk_biaya < 0)
+                                    <p class="bold">Pengurangan Biaya</p>
+                                @else
+                                    <p class="bold">Penambahan Biaya Tiket</p>
+                                @endif
                             </td>
                             <td style="border-bottom: 1px solid gray;">
                                 <p>Rp. {{ number_format($booking->tk_biaya)}}</p>
@@ -317,6 +302,28 @@
                             </td>
                             <td style="border-bottom: 1px solid gray;">
                                 <p>Rp. {{ number_format($booking->tk_biaya)}}</p>
+                            </td>
+                        </tr>
+                    @endif
+                    
+
+                    {{-- Penambahan Biaya --}}
+                    @if ($penambahan_biaya != 0)
+                        <tr style="text-align:center;">
+                            <td style="border-bottom: 1px solid gray;">
+                                <p>{{$no+1}}</p>
+                            </td>
+                            <td style="border-bottom: 1px solid gray;">
+                                <p class="bold">Penambahan Biaya Lainnya</p>
+                            </td>
+                            <td style="border-bottom: 1px solid gray;">
+                                <p>Rp. {{ number_format(6500)}}</p>
+                            </td>
+                            <td style="border-bottom: 1px solid gray;">
+                                {{-- <p>1</p> --}}
+                            </td>
+                            <td style="border-bottom: 1px solid gray;">
+                                <p>Rp. {{ number_format(6500)}}</p>
                             </td>
                         </tr>
                     @endif

@@ -57,7 +57,9 @@
                 text-align: left;
                 width: 80%;" class="invoice">
                     <tbody><tr>
-                        <td>Midtrans<br>Rincian Biaya</td>
+                        <td>
+                            {{$data['metode_pembayaran']}}
+                        <br>Rincian Biaya</td>
                     </tr>
                     <tr>
                         <td style="padding: 5px 0;">

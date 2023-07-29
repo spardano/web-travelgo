@@ -50,7 +50,6 @@ class AuthMobileController extends Controller
                 'code' => 'wrong-password',
                 "message" => "Password atau email salah, perhatikan kembali data yang anda inputkan"
             ]);
-
         } else {
 
             //jika pengguna belum terverifikasi
@@ -102,7 +101,7 @@ class AuthMobileController extends Controller
 
             $user = $createUser;
         }
- 
+
         // Simpan Login Logs berserta token
         $token = $this->crypt->crypt(Carbon::now());
         LoginLogs::create([
@@ -193,8 +192,6 @@ class AuthMobileController extends Controller
         ]);
 
         if ($user) {
-
-            $user->sendEmailVerificationNotification();
 
             $user->assignRole('Customer');
             $user->sendEmailVerificationNotification();

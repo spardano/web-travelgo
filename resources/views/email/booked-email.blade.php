@@ -113,7 +113,14 @@
                 text-align: left;
                 width: 80%;" class="invoice">
                     <tbody><tr>
-                        <td>Midtrans<br>Rincian Biaya</td>
+                        <td>
+                            @if ($data['biaya_admin'] == null)
+                                Bayar Lansung
+                            @else
+                                Midtrans
+                            @endif
+                            
+                        <br>Rincian Biaya</td>
                     </tr>
                     <tr>
                         <td style="padding: 5px 0;">
@@ -127,11 +134,22 @@
                                 </tr>
                                 @endforeach
                                 
-                                @if ($data['biaya_admin'] != null)    
+                                @if ($data['biaya_admin'])    
                                 <tr>
                                     <td style="border-top: #eee 1px solid;">Biaya Admin</td>
                                     <td style="border-top: #eee 1px solid;" class="alignright">Rp {{ number_format($data['biaya_admin']) }}</td>
                                 </tr>
+                                @endif
+
+                                @if ($data['tk_biaya'])    
+                                    <tr>
+                                        @if ($data['tk_biaya'] > 0)
+                                            <td style="border-top: #eee 1px solid;">Penambahan Biaya Tiket</td>
+                                        @else
+                                            <td style="border-top: #eee 1px solid;">Pengurangan Biaya Tiket</td>
+                                        @endif
+                                        <td style="border-top: #eee 1px solid;" class="alignright">Rp {{ number_format($data['tk_biaya']) }}</td>
+                                    </tr>
                                 @endif
 
                                 <tr class="total">

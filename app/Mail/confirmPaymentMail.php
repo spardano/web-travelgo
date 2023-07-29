@@ -34,11 +34,14 @@ class confirmPaymentMail extends Mailable
         $temp['email'] = $booking->user->email;
         $temp['total_harga'] = $booking->total_biaya;
         $temp['payment_number'] = $booking->paymentTransaction->number;
-        $biaya_admin = 0;
+        $temp['tk_biaya'] = $booking->tk_biaya ? $booking->tk_biaya : 0;
+
+        $metode = 'Pembayaran Lansung';
         if ($booking->paymentTransaction->snap_token != null) {
-            $biaya_admin = 6500;
+            $metode = 'Midtrans';
         }
-        $temp['biaya_admin'] = $biaya_admin;
+        $temp['biaya_admin'] = $booking->biaya_admin;
+        $temp['metode_pembayaran'] = $metode;
 
         $tiket = array();
         foreach ($booking->bookingDetail as $item) {

@@ -16,6 +16,7 @@ class Booking extends Model
         'titik_jemput',
         'titik_antar',
         'total_biaya',
+        'biaya_admin',
         'status',
     ];
 
