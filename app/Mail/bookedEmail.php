@@ -29,7 +29,6 @@ class bookedEmail extends Mailable
     {
         $booking = Booking::where('id', $id_booking)->first();
 
-
         //kota keberangkatan dan tujuan
         if ($booking->titik_jemput) {
             $titik_jemput = json_decode($booking->titik_jemput, true);

@@ -9,4 +9,8 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateAngkutan extends CreateRecord
 {
     protected static string $resource = AngkutanResource::class;
+    protected function getRedirectUrl(): string
+    {
+        return $this->getResource()::getUrl('index');
+    }
 }
