@@ -142,6 +142,20 @@
             </div>
         </section><!-- End Cliens Section -->
 
+        <section id="jadwal">
+            <div class="container" data-aos="fade-up">
+                <div class="section-title">
+                    <h2>Jadwal Keberangkatan</h2>
+                    <p>Temukan jadwal keberangkatan, kota penjemputan, kota pengantaran yang sesuai dengan kebutuhanmu </p>
+                </div>
+
+                <div class="row">
+                    
+                </div>
+            </div>
+        </section>
+        
+
         <!-- ======= About Us Section ======= -->
         <section id="about" class="about">
             <div class="container" data-aos="fade-up">
@@ -232,18 +246,7 @@
             </div>
         </section><!-- End Services Section -->
 
-        <section id="jadwal">
-            <div class="container" data-aos="fade-up">
-                <div class="section-title">
-                    <h2>Jadwal Keberangkatan</h2>
-                    <p>Temukan jadwal keberangkatan, kota penjemputan, kota pengantaran yang sesuai dengan kebutuhanmu </p>
-                </div>
-
-                <div class="row">
-                    
-                </div>
-            </div>
-        </section>
+       
 
         <!-- ======= Team Section ======= -->
         <section id="kontak" class="team section-bg">
@@ -413,6 +416,8 @@
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Tentang</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">layanan</a></li>
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Kontak</a></li>
+                            <li><i class="bx"></i> <a href="{{route('terms-condition')}}">Terms and Condition</a></li>
+                         
                         </ul>
                     </div>
 
