@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\invoiceController;
+use App\Http\Controllers\jadwalController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentCallbackController;
 use App\Mail\confirmPaymentMail;
@@ -19,9 +20,11 @@ use Illuminate\Support\Facades\Mail;
 */
 
 //hello
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [jadwalController::class, 'jadwal']);
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
 Route::get('/seat-modal', function () {
     return view('modal.seat-modal');
@@ -39,6 +42,9 @@ Route::get('payments/error', [PaymentCallbackController::class, 'error'])->name(
 Route::get('terms-condition', function () {
     return view('privacy.terms-condition');
 })->name('terms-condition');
+
+Route::get('verify/email/{token}', [AuthController::class, 'verify'])->name('verify-email');
+
 Route::get('test-email', function () {
     // Mail::to('sakti.pardano29@gmail.com')->send(new bookedEmail(53));
     Mail::to('sakti.pardano29@gmail.com')->send(new confirmPaymentMail(56));
