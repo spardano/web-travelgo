@@ -69,7 +69,7 @@
                     <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
                     <li><a class="nav-link scrollto" href="#about">Aplikasi</a></li>
                     <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
-                    <li><a class="nav-link scrollto" href="#jadwal" >Jadwal</a></li>
+                    <li><a class="nav-link scrollto" href="#jadwal">Jadwal</a></li>
                     <li><a class="nav-link scrollto" href="#kontak">Kontak</a></li>
                     <li><a class="getstarted scrollto" href="{{ url('admin') }}">Admin Login</a></li>
                 </ul>
@@ -92,9 +92,9 @@
                     </div>
                     <h2 style="padding-left: 120px;">Kami Mengutamakan Pelayanan Terbaik</h2>
                     <div class="d-flex justify-content-center justify-content-lg-start">
-                        <a href="#about" class="btn-get-started scrollto">Get App</a>
-                        <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="glightbox btn-watch-video"><i
-                                class="bi bi-play-circle"></i><span>Watch Video</span></a>
+                        <a href="{{ asset('/assets/img/app-debug.apk') }}" class="btn-get-started scrollto"
+                            download>Get
+                            App</a>
                     </div>
                 </div>
                 <div class="col-lg-6 order-1 order-lg-2 hero-img" data-aos="zoom-in" data-aos-delay="200">
@@ -126,7 +126,7 @@
                     </div>
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
-                        <img src="{{ asset('assets/img/Rengat.png') }}" class="img-fluid" alt="">
+                        <img src="{{ asset('assets/img/Rengat2.png') }}" class="img-fluid" alt="">
                     </div>
 
                     <div class="col-lg-2 col-md-4 col-6 d-flex align-items-center justify-content-center">
@@ -153,23 +153,27 @@
                 <div class="row content">
                     <div class="col-lg-12 text-center">
 
-                        <img src="{{asset('assets/img/travelgo.png')}}" width="800px" alt="">
+                        <img src="{{ asset('assets/img/travelgo.png') }}" width="800px" alt="">
 
                         <div class="desc-app" style="margin-top:80px; margin-bottom:30px">
-                            <h2 style="font-weight: 700;
+                            <h2
+                                style="font-weight: 700;
                             color: #515769;
                             line-height: 1.4;
-                            margin: 0 0 15px;">Aplikasi Pembelian Tiket TravelGO</h2>
+                            margin: 0 0 15px;">
+                                Aplikasi Pembelian Tiket TravelGO</h2>
 
-                            <p style="font-size: 15px;
+                            <p
+                                style="font-size: 15px;
                             font-weight: 400;
                             color: #a6a7aa;
                             margin-bottom: 15px; width:40%; margin:0 auto;">
-                                Dengan Menggunakan aplikasi Travelgo, kamu bisa membeli tiket sesuai dengan jadwal yang kamu mau. pembayaran lebih mudah dengan metode <b>Online Payment
+                                Dengan Menggunakan aplikasi Travelgo, kamu bisa membeli tiket sesuai dengan jadwal yang
+                                kamu mau. pembayaran lebih mudah dengan metode <b>Online Payment
                                 </b> </p>
                         </div>
-
-                        <button type="button" class="btn btn-outline-info">Install APK</button>
+                        <a href="{{ asset('/assets/img/app-debug.apk') }}" class="btn btn-outline-info"
+                            download>Install APK</a>
 
                     </div>
                 </div>
@@ -232,18 +236,49 @@
             </div>
         </section><!-- End Services Section -->
 
-        <section id="jadwal">
+        <section id="jadwal" class="services section-bg">
             <div class="container" data-aos="fade-up">
                 <div class="section-title">
                     <h2>Jadwal Keberangkatan</h2>
-                    <p>Temukan jadwal keberangkatan, kota penjemputan, kota pengantaran yang sesuai dengan kebutuhanmu </p>
+                    <p>Temukan jadwal keberangkatan, kota penjemputan, kota pengantaran yang sesuai dengan kebutuhanmu
+                    </p>
                 </div>
-
-                <div class="row">
-                    
-                </div>
+                @foreach ($data_baru as $item)
+                    <div class="row" style="padding-bottom: 10px;">
+                        <div class="col-xl-12 col-md-12  align-items-stretch" data-aos="zoom-in"
+                            data-aos-delay="100">
+                            <div class="icon-box">
+                                <div class="row">
+                                    <div class="col-xl-4">
+                                        <h4>
+                                            @php
+                                                // Menggunakan Carbon untuk memanipulasi tanggal_berangkat
+                                                $tanggalBerangkat = \Illuminate\Support\Carbon::parse($item['tanggal_berangkat']);
+                                                $waktuBerangkat = \Illuminate\Support\Carbon::parse($item['waktu_berangkat']);
+                                            @endphp
+                                            <a href="">{{ $tanggalBerangkat->format('d M Y') }}</a>
+                                        </h4>
+                                        <h5 style="text-transform: uppercase">{{ $item['nama_trayek'] }}</h5>
+                                        <h3>Harga: Rp.{{ $item['harga']}}</h3>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <h5>Angkutan: {{ $item['nama_angkutan'] }}</h5>
+                                        <h5>{{ $item['kelas'] }}</h5>
+                                        <h5>Berangkat : {{ $waktuBerangkat->format('H:i') }}</h5>
+                                    </div>
+                                    <div class="col-xl-4">
+                                        <h5>Tiket Tersedia:</h5>
+                                        <h1>{{ $item['tiket_tersedia'] }}</h1>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
             </div>
         </section>
+
 
         <!-- ======= Team Section ======= -->
         <section id="kontak" class="team section-bg">
@@ -264,8 +299,10 @@
                                     class="img-fluid" alt=""></div>
                             <div class="member-info">
                                 <h4>Resdal</h4>
-                                <span>Admin Pekanbaru</span>
-                                <p>Hp: 085219570004</p>
+                                <span>Pekanbaru</span>
+                                <a href="https://api.whatsapp.com/send?phone=6285219570004">
+                                    <p><i class="bi bi-whatsapp"></i> 085219570004</p>
+                                </a>
                                 <div class="social">
                                     <a href=""><i class="ri-twitter-fill"></i></a>
                                     <a href=""><i class="ri-facebook-fill"></i></a>
@@ -282,8 +319,10 @@
                                     class="img-fluid" alt=""></div>
                             <div class="member-info">
                                 <h4>Sarah Jhonson</h4>
-                                <span>Admin Padang-Dharmasraya</span>
-                                <p>Hp: 085219570004</p>
+                                <span>Admin Padang</span>
+                                <a href="https://api.whatsapp.com/send?phone=6285219570004">
+                                    <p><i class="bi bi-whatsapp"></i> 085219570004</p>
+                                </a>
                                 <div class="social">
                                     <a href=""><i class="ri-twitter-fill"></i></a>
                                     <a href=""><i class="ri-facebook-fill"></i></a>
@@ -300,8 +339,10 @@
                                     class="img-fluid" alt=""></div>
                             <div class="member-info">
                                 <h4>William Anderson</h4>
-                                <span>Admin Dumai-Rupat</span>
-                                <p>Hp: 085219570004</p>
+                                <span>Admin Dumai</span>
+                                <a href="https://api.whatsapp.com/send?phone=6285219570004">
+                                    <p><i class="bi bi-whatsapp"></i> 085219570004</p>
+                                </a>
                                 <div class="social">
                                     <a href=""><i class="ri-twitter-fill"></i></a>
                                     <a href=""><i class="ri-facebook-fill"></i></a>
@@ -319,7 +360,9 @@
                             <div class="member-info">
                                 <h4>Amanda Jepson</h4>
                                 <span>Admin Rengat</span>
-                                <p>Hp: 085219570004</p>
+                                <a href="https://api.whatsapp.com/send?phone=6285219570004">
+                                    <p><i class="bi bi-whatsapp"></i> 085219570004</p>
+                                </a>
                                 <div class="social">
                                     <a href=""><i class="ri-twitter-fill"></i></a>
                                     <a href=""><i class="ri-facebook-fill"></i></a>
@@ -364,13 +407,15 @@
                             <div class="email">
                                 <i class="bi bi-envelope"></i>
                                 <h4>Email:</h4>
-                                <p>www.Travelgo.com</p>
+                                <p></p>
                             </div>
 
                             <div class="phone">
                                 <i class="bi bi-phone"></i>
                                 <h4>Call:</h4>
-                                <p>085219570004</p>
+                                <a href="https://api.whatsapp.com/send?phone=6285219570004">
+                                    <p>085219570004</p>
+                                </a>
                             </div>
 
                             <iframe
@@ -401,8 +446,9 @@
                             Jl. Merak No.05 D, Tangkerang Tengah <br>
                             Kec.Marpoyan Damai, Kota Pekanbaru<br>
                             Riau 28125 <br><br>
-                            <strong>Phone:</strong> 085219570004<br>
-                            <strong>Email:</strong> www.JasaMulyaTravel.com<br>
+                            <a href="#" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
+                            <a href="https://api.whatsapp.com/send?phone=6285219570004">085219570004</a><br>
+                            <a href="#" class="gmail"><i class="bx bxl-gmail"></i></a><br>
                         </p>
                     </div>
 
@@ -440,19 +486,6 @@
                     </div>
 
                 </div>
-            </div>
-        </div>
-
-        <div class="container footer-bottom clearfix">
-            <div class="copyright">
-                &copy; Copyright <strong><span>Arsha</span></strong>. All Rights Reserved
-            </div>
-            <div class="credits">
-                <!-- All the links in the footer should remain intact. -->
-                <!-- You can delete the links only if you purchased the pro version. -->
-                <!-- Licensing information: https://bootstrapmade.com/license/ -->
-                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
             </div>
         </div>
     </footer><!-- End Footer -->
