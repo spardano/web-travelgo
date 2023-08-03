@@ -8,7 +8,7 @@ use Livewire\Component;
 
 class FormBooking extends Component
 {
-    public $id_jadwal = 16;
+    public $id_jadwal = 22;
     public $bangku;
     public $maxColumnLayout;
     public $jadwal;

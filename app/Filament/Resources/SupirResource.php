@@ -36,7 +36,6 @@ class SupirResource extends Resource
                     ->required()
                     ->maxLength(17),
                 Forms\Components\TextInput::make('nomor_sim')
-                    ->required()
                     ->maxLength(255),
                 Select::make('jenis_sim')
                     ->options([
@@ -49,7 +48,6 @@ class SupirResource extends Resource
                 SpatieMediaLibraryFileUpload::make('foto_sim')
                     ->collection('foto_sim_sopir'),
                 Forms\Components\Textarea::make('alamat')
-                    ->required()
                     ->maxLength(65535),
                 Forms\Components\TextInput::make('nomor_telp')
                     ->tel()

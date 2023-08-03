@@ -11,6 +11,12 @@ class AuthController extends Controller
     public function verify($token){
 
         $check = EmailVerificationRequest::where('token', $token)->first();
+
+        if(!$check){
+            $data['message'] = 'Verifikasi email ini tidak valid, silahkan kirim kembali!';
+            return view('errors.failed', $data);
+        }
+
         $user = User::find($check->id_user);
 
         if($user->email_verified_at != null){

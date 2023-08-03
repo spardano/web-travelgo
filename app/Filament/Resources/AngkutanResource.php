@@ -38,6 +38,7 @@ class AngkutanResource extends Resource
                         'HatchBack' => 'HatchBack',
                         'Sedan' => 'Sedan',
                         'Sport' => 'Sport',
+                        'Mini Bus' => 'Mini Bus',
                     ]),
                 Forms\Components\TextInput::make('merek_kendaraan')
                     ->required()
@@ -63,7 +64,6 @@ class AngkutanResource extends Resource
                 Tables\Columns\TextColumn::make('nama_angkutan'),
                 Tables\Columns\TextColumn::make('jenis_angkutan'),
                 Tables\Columns\TextColumn::make('merek_kendaraan'),
-                Tables\Columns\TextColumn::make('nomor_kendaraan'),
             ])
             ->filters([
                 //

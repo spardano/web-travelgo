@@ -4,6 +4,7 @@ use App\Http\Controllers\invoiceController;
 use App\Http\Controllers\jadwalController;
 use App\Http\Controllers\OrderController;
 use App\Http\Controllers\PaymentCallbackController;
+use App\Http\Controllers\AuthController;
 use App\Mail\confirmPaymentMail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Mail;
