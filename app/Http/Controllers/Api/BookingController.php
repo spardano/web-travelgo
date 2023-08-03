@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\AreaKerja;
 use App\Models\Jadwal;
-use App\Models\Trayek;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -15,17 +14,17 @@ class BookingController extends Controller
     {
         $jadwal = Jadwal::find($request->id_jadwal);
 
-            $area_persinggahan = json_decode($jadwal->trayek->area_persinggahan);
+        $area_persinggahan = json_decode($jadwal->trayek->area_persinggahan);
 
-            $area_coverage = [];
-            foreach ($area_persinggahan as $item) {
-                if($item->area_persinggahan != null){
-                    $temp['area_coverage'] = $item->area_persinggahan;
-                    $temp['tk_biaya'] = $item->tk_biaya;
-                    array_push($area_coverage, $temp);
-                }
+        $area_coverage = [];
+        foreach ($area_persinggahan as $item) {
+            if ($item->area_persinggahan != null) {
+                $temp['area_coverage'] = $item->area_persinggahan;
+                $temp['tk_biaya'] = $item->tk_biaya;
+                array_push($area_coverage, $temp);
             }
-        
+        }
+
 
         if ($request->type == 'penjemputan') {
             $init_asal['area_coverage'] = $jadwal->trayek->id_area_asal;

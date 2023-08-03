@@ -41,7 +41,7 @@ return [
     |
     */
 
-    'debug' => (bool) env('APP_DEBUG', false),
+    'debug' => (bool) env('APP_DEBUG', true),
 
     /*
     |--------------------------------------------------------------------------
@@ -54,13 +54,13 @@ return [
     |
     */
 
-    // 'url' => env('APP_URL', 'http://web-travelgo.test/'),
+    'url' => env('APP_URL', 'http://web-travelgo.test/'),
 
-    // 'asset_url' => env('ASSET_URL', 'http://web-travelgo.test/'),
+    'asset_url' => env('ASSET_URL', 'http://web-travelgo.test/'),
 
-    'url' => env('APP_URL', 'https://jmtravel.pocari.id/'),
+    // 'url' => env('APP_URL', 'https://jmtravel.pocari.id/'),
 
-    'asset_url' => env('ASSET_URL', 'https://jmtravel.pocari.id/'),
+    // 'asset_url' => env('ASSET_URL', 'https://jmtravel.pocari.id/'),
 
     /*
     |--------------------------------------------------------------------------

@@ -7,7 +7,6 @@ use App\Models\Booking;
 use App\Models\PaymentTransactions;
 use App\Models\Ticket;
 use App\Services\Midtrans\CallbackService;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class PaymentCallbackController extends Controller
@@ -79,7 +78,6 @@ class PaymentCallbackController extends Controller
                     'success' => true,
                     'message' => 'Notifikasi berhasil diproses',
                 ], 200);
-                
         } else {
             return response()
                 ->json([
