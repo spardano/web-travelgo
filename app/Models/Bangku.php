@@ -20,4 +20,9 @@ class Bangku extends Model
     {
         return $this->hasMany(DetailBangku::class, 'id_angkutan', 'id_angkutan');
     }
+
+    public function angkutan()
+    {
+        return $this->belongsTo(Angkutan::class, 'id_angkutan');
+    }
 }

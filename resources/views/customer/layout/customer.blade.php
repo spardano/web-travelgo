@@ -69,11 +69,16 @@
             <nav id="navbar" class="navbar">
                 <ul>
                     <li><a class="nav-link scrollto active" href="#hero">Beranda</a></li>
+                    <li><a class="nav-link scrollto" href="#jadwal">Jadwal</a></li>
                     <li><a class="nav-link scrollto" href="#about">Aplikasi</a></li>
                     <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
-                    <li><a class="nav-link scrollto" href="#jadwal">Jadwal</a></li>
                     <li><a class="nav-link scrollto" href="#kontak">Kontak</a></li>
-                    <li><a class="getstarted scrollto" href="{{ url('admin') }}">Admin Login</a></li>
+                    {{-- <li><a class="getstarted scrollto" href="{{ url('admin') }}">Admin Login</a></li> --}}
+                    @if (empty(Session::get('access_token')))
+                        <li><a class="getstarted scrollto" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login | Register</a></li>
+                    @else
+                        <li><a class="getstarted scrollto" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Akun</a></li>
+                    @endif
                 </ul>
                 <i class="bi bi-list mobile-nav-toggle"></i>
             </nav><!-- .navbar -->
@@ -181,11 +186,31 @@
         </div>
     </footer><!-- End Footer -->
 
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">Login</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                @livewire('login-customer')
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+        </div>
+    </div>
+  
+
     <div id="preloader"></div>
     <a href="#" class="back-to-top d-flex align-items-center justify-content-center"><i
             class="bi bi-arrow-up-short"></i></a>
 
     <!-- Vendor JS Files -->
+    <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js" integrity="sha256-xLD7nhI62fcsEZK2/v8LsBcb4lG7dgULkuXoXB/j91c=" crossorigin="anonymous"></script>
     <script src="{{ asset('assets/vendor/aos/aos.js') }}"></script>
     <script src="{{ asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
@@ -193,11 +218,14 @@
     <script src="{{ asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
     <script src="{{ asset('assets/vendor/waypoints/noframework.waypoints.js') }}"></script>
     <script src="{{ asset('assets/vendor/php-email-form/validate.js') }}"></script>
-
     <!-- Template Main JS File -->
     <script src="{{ asset('assets/js/main.js') }}"></script>
 
+    @stack('js')
+
+    
     @livewireScripts
+
 
 </body>
 

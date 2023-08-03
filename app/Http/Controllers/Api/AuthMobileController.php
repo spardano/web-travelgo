@@ -57,11 +57,11 @@ class AuthMobileController extends Controller
             //jika pengguna belum terverifikasi
             if ($user->email_verified_at == null) {
 
-               return response()->json([
-                   'status' => false,
-                   'code' => 'unverified',
-                   "message" => "Verifikasi Email Terlebih dahulu."
-               ]);
+                return response()->json([
+                    'status' => false,
+                    'code' => 'unverified',
+                    "message" => "Verifikasi Email Terlebih dahulu."
+                ]);
             }
 
             $token = $this->crypt->crypt(Carbon::now());
@@ -194,7 +194,6 @@ class AuthMobileController extends Controller
         ]);
 
         if ($user) {
-
             $user->assignRole('Customer');
             Mail::to($user->email)->send(new verifyEmail($user->id));
 
@@ -224,6 +223,7 @@ class AuthMobileController extends Controller
 
         return response()->json([
             'status' => true,
+            'user' => $data['user'],
             'access_token' => $tokenCrypt,
             'expired_at' => $data['expired_at'],
         ], 200);
@@ -308,10 +308,11 @@ class AuthMobileController extends Controller
         ]);
     }
 
-    public function resendEmailVerification(Request $request){
+    public function resendEmailVerification(Request $request)
+    {
         $user = User::where('email', $request->email)->first();
 
-        if(!$user){
+        if (!$user) {
             return response()->json([
                 'status' => false,
                 'message' => 'Email Tidak dikenali'
@@ -324,6 +325,5 @@ class AuthMobileController extends Controller
             'status' => true,
             'message' => 'Email Berhasil dikirimkan kembali, silahkan periksa kotak masuk',
         ]);
-
     }
 }

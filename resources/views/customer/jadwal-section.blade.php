@@ -59,11 +59,11 @@
                                     </div>
                                 </div>
 
-                                <button type="button" class="btn btn-info text-white mt-4" data-bs-toggle="modal" data-bs-target="#modalBookingTiket">Booking Tiket</button>
+                                {{-- <button type="button" class="btn btn-info text-white mt-4" data-bs-toggle="modal" data-bs-target="#modalBookingTiket">Booking Tiket</button> --}}
+                                <button type="button" class="btn btn-info text-white mt-4 btnModalTiket"  data-id="{{ $item['id_jadwal']}}">Booking Tiket</button>
                                 
                             </div>
                             
-
                         </div>
 
             
@@ -74,22 +74,18 @@
     </div>
 </section>
 
-
-<div class="modal fade" id="modalBookingTiket" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-lg">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
-            @livewire('form-booking')
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Booking</button>
-        </div>
-      </div>
-    </div>
-</div>
+@livewire('form-booking')
   
+@push('js')
+<script>
+    $('.btnModalTiket').on('click', function(){
+        const id = $(this).data('id')
+        Livewire.emit('setJadwaId', id)
+        $('#modalBookingTiket').modal('show')
+    })
+
+    $('#modalBookingTiket').on('hidden.bs.modal', function () {
+        Livewire.emit('resetContent');
+    });
+</script>
+@endpush

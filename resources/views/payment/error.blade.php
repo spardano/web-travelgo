@@ -20,7 +20,7 @@
                         </div>
                         <div class="text-center">
                             <h1>Ooopss !</h1>
-                            <p>Sepertinya terjadi kesalahan, tapi tenanng, kamu bisa ulangi lagi kok</p>
+                            <p>Sepertinya terjadi kesalahan, tapi tenang, kamu bisa ulangi lagi kok</p>
                         </div>
                     </div>
                 </div>
