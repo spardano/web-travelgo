@@ -136,7 +136,7 @@ class FormBooking extends Component
         $booking = Booking::create([
             'jumlah_tiket' => count($this->selectedSeat),
             'waktu_booking' => Carbon::now(),
-            'id_customer' => 2,
+            'id_customer' => session('id_cus'),
             'total_biaya' => $this->totalTagihan,
             'titik_jemput' => json_encode($titik_jemput),
             'titik_antar' => json_encode($titik_antar),
@@ -150,7 +150,7 @@ class FormBooking extends Component
                 $detail_booking = BookingDetail::create([
                     'id_booking' => $booking->id,
                     'id_tiket' => $item['tiket']['id'],
-                    'nama_penumpang' => 'Sakti Pardano',
+                    'nama_penumpang' => session('nama_cus'),
                     'nomor_hp_wa' => '0895618958338',
                     'harga_tiket' => $item['tiket']['harga_tiket'],
                 ]);
@@ -163,7 +163,7 @@ class FormBooking extends Component
             $payment = PaymentTransactions::create([
                 'number' => Str::orderedUuid(),
                 'id_booking' => $booking->id,
-                'id_customer' => 2,
+                'id_customer' => session('id_cus'),
                 'gross_amount' => $booking->total_biaya,
                 'payment_status' => 1,
             ]);
@@ -172,7 +172,7 @@ class FormBooking extends Component
             $this->isOpenPayment = true;
 
             //send email;
-            Mail::to('sakti.pardano29@gmail.com')->send(new bookedEmail($booking->id));
+            Mail::to(session('email_cus'))->send(new bookedEmail($booking->id));
         }
     }
 }
