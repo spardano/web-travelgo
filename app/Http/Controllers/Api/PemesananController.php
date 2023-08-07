@@ -131,7 +131,6 @@ class PemesananController extends Controller
             $media = $jadwal->angkutan->getMedia('foto_kendaraan')->where('model_id', $jadwal->angkutan->id)->first();
 
 
-
             $wkt = explode(" ", $bookingDetail->ticket->jadwal->tgl_keberangkatan);
             $temp['nama_trayek'] = $bookingDetail->ticket->jadwal->trayek ? $bookingDetail->ticket->jadwal->trayek->nama_trayek : null;
             $temp['id_booking'] = $item->id;

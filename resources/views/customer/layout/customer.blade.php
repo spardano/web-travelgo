@@ -73,10 +73,12 @@
                     <li><a class="nav-link scrollto" href="#about">Aplikasi</a></li>
                     <li><a class="nav-link scrollto" href="#services">Layanan</a></li>
                     <li><a class="nav-link scrollto" href="#kontak">Kontak</a></li>
-                    {{-- <li><a class="getstarted scrollto" href="{{ url('admin') }}">Admin Login</a></li> --}}
+                    
+                    
                     @if (empty(Session::get('access_token')))
                         <li><a class="getstarted scrollto" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login | Register</a></li>
                     @else
+                        <li><a class="nav-link scrollto" href="#" data-bs-toggle="modal" data-bs-target="#pemesananModal">Data Pemesanan</a></li>
                         <li><a class="getstarted scrollto" href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Akun</a></li>
                     @endif
                 </ul>
