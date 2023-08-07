@@ -36,10 +36,10 @@
                     <div class="pic"><img src="{{ asset('assets/img/team/team-2.jpg') }}"
                             class="img-fluid" alt=""></div>
                     <div class="member-info">
-                        <h4>Sarah Jhonson</h4>
+                        <h4>Ridho</h4>
                         <span>Admin Padang</span>
-                        <a href="https://api.whatsapp.com/send?phone=6285219570004">
-                            <p><i class="bi bi-whatsapp"></i> 085219570004</p>
+                        <a href="https://api.whatsapp.com/send?phone=6282391559288">
+                            <p><i class="bi bi-whatsapp"></i> 082391559288</p>
                         </a>
                         <div class="social">
                             <a href=""><i class="ri-twitter-fill"></i></a>
@@ -56,10 +56,10 @@
                     <div class="pic"><img src="{{ asset('assets/img/team/team-3.jpg') }}"
                             class="img-fluid" alt=""></div>
                     <div class="member-info">
-                        <h4>William Anderson</h4>
+                        <h4>Ardi</h4>
                         <span>Admin Dumai</span>
-                        <a href="https://api.whatsapp.com/send?phone=6285219570004">
-                            <p><i class="bi bi-whatsapp"></i> 085219570004</p>
+                        <a href="https://api.whatsapp.com/send?phone=6281378593902">
+                            <p><i class="bi bi-whatsapp"></i> 081378593902</p>
                         </a>
                         <div class="social">
                             <a href=""><i class="ri-twitter-fill"></i></a>
@@ -76,10 +76,10 @@
                     <div class="pic"><img src="{{ asset('assets/img/team/team-4.jpg') }}"
                             class="img-fluid" alt=""></div>
                     <div class="member-info">
-                        <h4>Amanda Jepson</h4>
+                        <h4>Ratra</h4>
                         <span>Admin Rengat</span>
-                        <a href="https://api.whatsapp.com/send?phone=6285219570004">
-                            <p><i class="bi bi-whatsapp"></i> 085219570004</p>
+                        <a href="https://api.whatsapp.com/send?phone=6285331487770">
+                            <p><i class="bi bi-whatsapp"></i> 085331487770</p>
                         </a>
                         <div class="social">
                             <a href=""><i class="ri-twitter-fill"></i></a>

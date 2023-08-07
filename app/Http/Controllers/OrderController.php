@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PaymentTransactions;
 use App\Services\Midtrans\CreateSnapTokenService;
 use Illuminate\Http\Request;
+use App\Models\Booking;
 
 class OrderController extends Controller
 {
@@ -40,11 +41,15 @@ class OrderController extends Controller
 
         $paymentTransactions = PaymentTransactions::where('number', $transaction_number)->first();
 
-
         $snapToken = $paymentTransactions->snap_token;
+
+        //update booking
+        $booking = Booking::where('id', $paymentTransactions->id_booking)->first();
+        $booking->biaya_admin = 6500;
+        $booking->save();
+
         if (is_null($snapToken)) {
             // If snap token is still NULL, generate snap token and save it to database
-
             $midtrans = new CreateSnapTokenService($paymentTransactions);
             $snapToken = $midtrans->getSnapToken();
 
