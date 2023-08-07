@@ -11,82 +11,40 @@
 
         <div class="row">
 
-            <div class="col-lg-6" data-aos="zoom-in" data-aos-delay="100">
+            <div class="col-lg-12" data-aos="zoom-in" data-aos-delay="300">
                 <div class="member d-flex align-items-start">
-                    <div class="pic"><img src="{{ asset('assets/img/team/team-1.jpg') }}"
-                            class="img-fluid" alt=""></div>
                     <div class="member-info">
-                        <h4>Resdal</h4>
-                        <span>Pekanbaru</span>
-                        <a href="https://api.whatsapp.com/send?phone=6285219570004">
-                            <p><i class="bi bi-whatsapp"></i> 085219570004</p>
+                        <h4>Aldian Willia</h4>
+                        <span>Sistem</span>
+                        <a href="https://api.whatsapp.com/send?phone=62895618958338">
+                            <p><i class="bi bi-whatsapp"></i> 0895618958338</p>
                         </a>
-                        <div class="social">
-                            <a href=""><i class="ri-twitter-fill"></i></a>
-                            <a href=""><i class="ri-facebook-fill"></i></a>
-                            <a href=""><i class="ri-instagram-fill"></i></a>
-                            <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                        </div>
+                        <a href="mailto:aldianwillia42@gmial.com">
+                        <p><i class="bi bi-envelope bi-lg"></i> aldianwillia42@gmial.com</a>
                     </div>
                 </div>
             </div>
 
-            <div class="col-lg-6 mt-4 mt-lg-0" data-aos="zoom-in" data-aos-delay="200">
+            <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="500">
                 <div class="member d-flex align-items-start">
-                    <div class="pic"><img src="{{ asset('assets/img/team/team-2.jpg') }}"
-                            class="img-fluid" alt=""></div>
                     <div class="member-info">
-                        <h4>Ridho</h4>
-                        <span>Admin Padang</span>
-                        <a href="https://api.whatsapp.com/send?phone=6282391559288">
-                            <p><i class="bi bi-whatsapp"></i> 082391559288</p>
-                        </a>
-                        <div class="social">
-                            <a href=""><i class="ri-twitter-fill"></i></a>
-                            <a href=""><i class="ri-facebook-fill"></i></a>
-                            <a href=""><i class="ri-instagram-fill"></i></a>
-                            <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="300">
-                <div class="member d-flex align-items-start">
-                    <div class="pic"><img src="{{ asset('assets/img/team/team-3.jpg') }}"
-                            class="img-fluid" alt=""></div>
-                    <div class="member-info">
-                        <h4>Ardi</h4>
-                        <span>Admin Dumai</span>
-                        <a href="https://api.whatsapp.com/send?phone=6281378593902">
-                            <p><i class="bi bi-whatsapp"></i> 081378593902</p>
-                        </a>
-                        <div class="social">
-                            <a href=""><i class="ri-twitter-fill"></i></a>
-                            <a href=""><i class="ri-facebook-fill"></i></a>
-                            <a href=""><i class="ri-instagram-fill"></i></a>
-                            <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="400">
-                <div class="member d-flex align-items-start">
-                    <div class="pic"><img src="{{ asset('assets/img/team/team-4.jpg') }}"
-                            class="img-fluid" alt=""></div>
-                    <div class="member-info">
-                        <h4>Ratra</h4>
-                        <span>Admin Rengat</span>
+                        <h4>Ratna</h4>
+                        <span>Admin Operator</span>
                         <a href="https://api.whatsapp.com/send?phone=6285331487770">
                             <p><i class="bi bi-whatsapp"></i> 085331487770</p>
                         </a>
-                        <div class="social">
-                            <a href=""><i class="ri-twitter-fill"></i></a>
-                            <a href=""><i class="ri-facebook-fill"></i></a>
-                            <a href=""><i class="ri-instagram-fill"></i></a>
-                            <a href=""> <i class="ri-linkedin-box-fill"></i> </a>
-                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 mt-4" data-aos="zoom-in" data-aos-delay="600">
+                <div class="member d-flex align-items-start">
+                    <div class="member-info">
+                        <h4>Resdal</h4>
+                        <span>Admin Utama</span>
+                        <a href="https://api.whatsapp.com/send?phone=6285219570004">
+                            <p><i class="bi bi-whatsapp"></i> 085219570004</p>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -148,3 +106,9 @@
 
     </div>
 </section><!-- End Contact Section -->
+
+
+
+
+
+

@@ -9,6 +9,7 @@ use Filament\Resources\Pages\ManageRecords;
 class ManageJenisKelas extends ManageRecords
 {
     protected static string $resource = JenisKelasResource::class;
+    protected static bool $canCreateAnother = false;
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

@@ -9,6 +9,8 @@ use Filament\Resources\Pages\CreateRecord;
 class CreateAngkutan extends CreateRecord
 {
     protected static string $resource = AngkutanResource::class;
+    protected static bool $canCreateAnother = false;
+    
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

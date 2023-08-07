@@ -12,6 +12,7 @@ use Ramsey\Uuid\Type\Integer;
 class CreateJadwal extends CreateRecord
 {
     protected static string $resource = JadwalResource::class;
+    protected static bool $canCreateAnother = false;
     protected function getRedirectUrl(): string
     {
         return $this->getResource()::getUrl('index');

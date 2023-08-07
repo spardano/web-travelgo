@@ -6,6 +6,7 @@ use App\Filament\Resources\RefundTransactionResource\Pages;
 use App\Filament\Resources\RefundTransactionResource\RelationManagers;
 use App\Models\Booking;
 use App\Models\Refund;
+use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -17,6 +18,8 @@ use Filament\Tables;
 use Filament\Tables\Columns\BadgeColumn;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\rejectedRefundMail;
 
 class RefundTransactionResource extends Resource
 {
@@ -90,6 +93,10 @@ class RefundTransactionResource extends Resource
     {
         $record->status = 1;
         $record->save();
+
+        Booking::where('id', $record->id_booking)->update([
+            'status' => 6
+        ]);
     }
 
     public static function rejected($record, $data)
@@ -102,6 +109,13 @@ class RefundTransactionResource extends Resource
         Booking::where('id', $record->id_booking)->update([
             'status' => 2
         ]);
+
+        $user = User::where('id', $record->id_customer)->first();
+
+        if($user){
+            Mail::to($user->email)->send(new rejectedRefundMail($data['alasan_penolakan']));
+        }
+
     }
 
     public static function getRelations(): array

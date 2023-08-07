@@ -9,6 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 class EditAngkutan extends EditRecord
 {
     protected static string $resource = AngkutanResource::class;
+    protected static bool $canCreateAnother = false;
 
     protected function getActions(): array
     {

@@ -4,12 +4,12 @@ return [
     'models' => [
         'User'       => \App\Models\User::class,
         'Role'       => \Spatie\Permission\Models\Role::class,
-        'Permission' => \Spatie\Permission\Models\Permission::class,
+        // 'Permission' => \Spatie\Permission\Models\Permission::class,
     ],
     'resources'     => [
         'UserResource'       => \Phpsa\FilamentAuthentication\Resources\UserResource::class,
         'RoleResource'       => \Phpsa\FilamentAuthentication\Resources\RoleResource::class,
-        'PermissionResource' => \Phpsa\FilamentAuthentication\Resources\PermissionResource::class,
+        // 'PermissionResource' => \Phpsa\FilamentAuthentication\Resources\PermissionResource::class,
     ],
     'pages'         => [
         'Profile' => \Phpsa\FilamentAuthentication\Pages\Profile::class
@@ -23,7 +23,7 @@ return [
     ],
     'preload_roles' => true,
     'impersonate'   => [
-        'enabled'  => true,
+        'enabled'  => false,
         'guard'    => 'web',
         'redirect' => '/'
     ]

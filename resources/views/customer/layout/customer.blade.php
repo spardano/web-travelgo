@@ -142,9 +142,6 @@
                             Jl. Merak No.05 D, Tangkerang Tengah <br>
                             Kec.Marpoyan Damai, Kota Pekanbaru<br>
                             Riau 28125 <br><br>
-                            <a href="#" class="whatsapp"><i class="bx bxl-whatsapp"></i></a>
-                            <a href="https://api.whatsapp.com/send?phone=6285219570004">085219570004</a><br>
-                            <a href="#" class="gmail"><i class="bx bxl-gmail"></i></a><br>
                         </p>
                     </div>
 
@@ -170,19 +167,6 @@
                             <li><i class="bx bx-chevron-right"></i> <a href="#">Pengembalian Dana</a></li>
                         </ul>
                     </div>
-
-                    <div class="col-lg-3 col-md-6 footer-links">
-                        <h4>Media Sosial Jasa Mulya Travel</h4>
-                        <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
-                        <div class="social-links mt-3">
-                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
-                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
-                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
-                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
-                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </div>

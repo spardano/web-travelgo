@@ -188,7 +188,6 @@
             <div class="header">
 
                 <table style="width: 100%">
-
                     <tr>
                         <td>
                             <div class="bill_sec" style="padding-left: 20px">
@@ -197,6 +196,7 @@
                                 <span>
                                     {{$booking->user->email}}
                                 </span>
+                                <p><b>Payment Number :</b> {{$booking->paymentTransaction->number}}</p>
                             </div>
                         </td>
                         <td style="text-align: right; padding-right:20px;">
@@ -248,8 +248,6 @@
                     @endphp
 
                     @endforeach
-
-                    
 
                     {{-- biaya admin --}}
                     @if ($booking->biaya_admin != null)
