@@ -75,6 +75,10 @@
 </section>
 
 @livewire('form-booking')
+
+@if (!empty(Session::get('access_token')))
+    @livewire('pemesanan', ['id_user' => Session::get('id_cus')])
+@endif
   
 @push('js')
 <script>
